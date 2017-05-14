@@ -16,8 +16,8 @@ public class SpaceShip extends Sprite {
     private int speed_x;
     private int speed_y;
     protected Missil missil;
-    //protected Alien alien,alien2;
     protected ArrayList <Alien> aliens;
+    protected Audio tiro;
     protected int aux,cont=0,q=0;
 
     public int getSpeed_x() {
@@ -58,8 +58,7 @@ public class SpaceShip extends Sprite {
          aliens = new ArrayList();
         aux=0;
         missil = new Missil(x,y);
-        //alien = new Alien(0,0);
-        //alien2 = new Alien(20,20);
+       tiro = new Audio();
         initSpaceShip();
     }
 
@@ -124,32 +123,46 @@ public class SpaceShip extends Sprite {
         }
            if(key == KeyEvent.VK_SPACE){
               aux = 1;
-              
+               
+               tiro.tocar("audio/tiro.wav");
               missil.setX(x);
               if(missil.getY()<=0){
                   missil.setY(y);
               }
 
               for(int i=0;i<aliens.size();i++){
-              if(aliens.get(i).getX() == missil.getX()){
+                  
+              if((aliens.get(i).getX() == missil.getX()) || (aliens.get(i).getX()+1 == missil.getX()) || (aliens.get(i).getX() == missil.getX()+2)
+                      || (aliens.get(i).getX()+3 == missil.getX()) || (aliens.get(i).getX()+4 == missil.getX()) || (aliens.get(i).getX()+5 == missil.getX())
+                      || (aliens.get(i).getX()+6 == missil.getX()) || (aliens.get(i).getX()+7 == missil.getX()) || (aliens.get(i).getX()+8 == missil.getX())
+                      || (aliens.get(i).getX()+9 == missil.getX()) || (aliens.get(i).getX()+10 == missil.getX())|| (aliens.get(i).getX()+11 == missil.getX())
+                      || (aliens.get(i).getX()+12 == missil.getX()) || (aliens.get(i).getX()+13 == missil.getX()) || (aliens.get(i).getX()+14 == missil.getX())
+                      ||(aliens.get(i).getX()+15 == missil.getX()) || (aliens.get(i).getX()+16 == missil.getX()) || (aliens.get(i).getX()+17 == missil.getX())
+                      || (aliens.get(i).getX()+18 == missil.getX()) || (aliens.get(i).getX()+19 == missil.getX()) || (aliens.get(i).getX()+20 == missil.getX())){
                       aliens.get(i).loadImage("images/explosion.png");   
                       aliens.remove(i);
                       
                       q++;
-                      if(q==3){
+                      if(q==50){
                           cont=0;
                       }
-                      if(q==6){
+                      if(q==100){
                           cont=0;
                       }
-                        if(q>=9){
+                      if(q==150){
+                          cont=0;   
+                      }
+                        if(q==200){
+                          cont=0;   
+                      }
+                      if(aliens.size() == 0){
                           cont=0;
-                          
                       }
                  }
+            
                 
               }
-              System.out.println("aaaa");
+        
         }
         
     }

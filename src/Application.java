@@ -8,6 +8,8 @@ import java.awt.Rectangle;
 import java.awt.Shape;
 import java.awt.image.ImageObserver;
 import java.text.AttributedCharacterIterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -32,14 +34,15 @@ public class Application extends JFrame {
            Cadastro pessoa = new Cadastro();
            Application app = new Application();
            TelasJogo telas = new TelasJogo(pessoa,app);
-       
+           Audio inicial = new Audio();
            
             
       EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-          
-          
+         
+           inicial.tocar("audio/ufo.wav");
+  
            telas.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
            telas.setLocationRelativeTo(null);
            telas.setVisible(true);

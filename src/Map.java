@@ -66,14 +66,12 @@ public class Map extends JPanel implements ActionListener {
         Toolkit.getDefaultToolkit().sync();
 
     }
-int a=0,p=0,b=0,dif=3,l1=3,l2=6;
-    private void draw(Graphics g) throws InterruptedException {
+int a=0,p=0,b=0,dif=3,l1=50,l2=80;
 
-//        if(a == 0){
-//            spaceship.aliens.add(new Alien(p,0));
-//        }
-        //spaceship.aliens.add(new Alien(p,0));
-        // Draw spaceship
+    private void draw(Graphics g) throws InterruptedException {
+            
+            
+       
         g.drawImage(spaceship.getImage(), spaceship.getX(), spaceship.getY(), this);
          for(int i=0;i<spaceship.aliens.size();i++){
             g.drawImage(spaceship.aliens.get(i).getImage(), spaceship.aliens.get(i).getX(), spaceship.aliens.get(i).getY(), this);
@@ -104,25 +102,28 @@ int a=0,p=0,b=0,dif=3,l1=3,l2=6;
                 p+=40;
                 }
             spaceship.aliens.add(new Alien(p,0));
-            if(spaceship.q == 3){
+            if(spaceship.q > 50 && spaceship.q < 100){
                 spaceship.aliens.get(i).loadImage("images/alien_MEDIUM.png");   
                          
             }
-            if(spaceship.q == 6){
+            if(spaceship.q > 100){
                 spaceship.aliens.get(i).loadImage("images/alien_HARD.png");   
                          
             }
+           
             }   
-       
+//       else if(spaceship.q >=l2){
+//                dif = dif+2;
+//                
+//            }
             spaceship.cont=1;
             //b++;
             if(spaceship.q >= l1){
                 dif=dif+1;
+                l1+=l1+10;
                 
-            }
-            if(spaceship.q >=l2){
-                dif = dif+2;
-                
+            }else{
+                dif = dif;
             }
        }
        }
