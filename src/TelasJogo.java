@@ -1,14 +1,21 @@
 
+import java.awt.Color;
+import java.awt.Graphics;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
+import javax.swing.JPanel;
 
 public class TelasJogo extends javax.swing.JFrame {
+
     private Application app;
     private Cadastro pessoa;
-    private Map mapa;
+    private SpaceShip nave;
     private boolean aberto;
+
+  
 
     public boolean isAberto() {
         return aberto;
@@ -17,7 +24,7 @@ public class TelasJogo extends javax.swing.JFrame {
     public void setAberto(boolean aberto) {
         this.aberto = aberto;
     }
-  
+
     public Application getApp() {
         return app;
     }
@@ -33,26 +40,26 @@ public class TelasJogo extends javax.swing.JFrame {
     public void setPessoa(Cadastro pessoa) {
         this.pessoa = pessoa;
     }
-   
-  
-    public TelasJogo(Cadastro pessoa,Application app,Map mapa){
-     this.pessoa = pessoa;
-     this.app = app;
-     this.mapa = mapa;
-     initComponents();
-     setResizable(false);
-     this.aberto = true;
-     tela1.setVisible(true);
-     tela2.setVisible(false);
-     tela3.setVisible(false);
-    }
-    public TelasJogo(Application app){
+
+    public TelasJogo(Cadastro pessoa, Application app) {
+        this.pessoa = pessoa;
         this.app = app;
+        this.nave = nave;
+        setTitle("Space Combat Game");
+        initComponents();
+        setResizable(false);
+        this.aberto = true;
+        tela1.setVisible(true);
+        tela2.setVisible(false);
+        tela3.setVisible(false);
     }
+
+  
+
     public TelasJogo() {
         initComponents();
         setResizable(false);
-        
+
     }
 
     /**
@@ -254,7 +261,7 @@ public class TelasJogo extends javax.swing.JFrame {
                 .addGroup(tela3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(tela3Layout.createSequentialGroup()
                         .addGap(24, 24, 24)
-                        .addGroup(tela3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(tela3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(tela3Layout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addGap(18, 18, 18)
@@ -262,7 +269,7 @@ public class TelasJogo extends javax.swing.JFrame {
                             .addGroup(tela3Layout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addGap(18, 18, 18)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jScrollPane2))))
                     .addGroup(tela3Layout.createSequentialGroup()
                         .addGap(166, 166, 166)
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -335,75 +342,68 @@ public class TelasJogo extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 //           
-           tela1.setVisible(false);
-           tela2.setVisible(false);
-           tela3.setVisible(true);
-           
+        tela1.setVisible(false);
+        tela2.setVisible(false);
+        tela3.setVisible(true);
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void tutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tutActionPerformed
-       tela3.setVisible(false);
-       tela1.setVisible(false);
-       tela2.setVisible(true);
-     
+        tela3.setVisible(false);
+        tela1.setVisible(false);
+        tela2.setVisible(true);
+
     }//GEN-LAST:event_tutActionPerformed
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
         tela3.setVisible(false);
         tela2.setVisible(false);
         tela1.setVisible(true);
-       
+
     }//GEN-LAST:event_jLabel3MouseClicked
 
     private void gtnomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gtnomeActionPerformed
-       
+
     }//GEN-LAST:event_gtnomeActionPerformed
 
     private void btsalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btsalvarActionPerformed
-        boolean aux=false;
-        if(gtnome.getText().equals("") || gtfrase.getText().equals("")){
+        boolean aux = false;
+        if (gtnome.getText().equals("") || gtfrase.getText().equals("")) {
             aux = false;
-        }else{
+        } else {
             aux = true;
         }
-        if(aux == true){
-        pessoa.setApelido(gtnome.getText());
-        pessoa.setFrase(gtfrase.getText());
-        pessoa.setSalvo(true);
-         JOptionPane.showConfirmDialog(null, "Dados salvos com sucesso!", "Confirmação de Cadastro", JOptionPane.PLAIN_MESSAGE);
-        }else{
-         JOptionPane.showConfirmDialog(null, "Preencha todos os campos do cadastro!", "Erro de Cadastro", JOptionPane.PLAIN_MESSAGE);   
+        if (aux == true) {
+            pessoa.setApelido(gtnome.getText());
+            pessoa.setFrase(gtfrase.getText());
+            pessoa.setSalvo(true);
+            JOptionPane.showConfirmDialog(null, "Dados salvos com sucesso!", "Confirmação de Cadastro", JOptionPane.PLAIN_MESSAGE);
+        } else {
+            JOptionPane.showConfirmDialog(null, "Preencha todos os campos do cadastro!", "Erro de Cadastro", JOptionPane.PLAIN_MESSAGE);
         }
-    
+
     }//GEN-LAST:event_btsalvarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-      if(pessoa.getSalvo()){
-          this.dispose();
-//          app.setVisible(true);  
-          setAberto(false);
-          
-          //app.setIconImage(mapa.getBack());
-//          mapa.paintComponent(mapa.getGraphics());
-   
-          app.setVisible(true); 
-      }else{
-          JOptionPane.showConfirmDialog(null,"É necessário salvar os dados antes de iniciar o jogo!","Alerta",JOptionPane.WARNING_MESSAGE);
-      }
+        if (pessoa.getSalvo()) {
+            this.dispose();      
+            app.setVisible(true);
+        } else {
+            JOptionPane.showConfirmDialog(null, "É necessário salvar os dados antes de iniciar o jogo!", "Alerta", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void gtnomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gtnomeMouseClicked
-       gtnome.setText("");
+        gtnome.setText("");
     }//GEN-LAST:event_gtnomeMouseClicked
 
     private void gtfraseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gtfraseMouseClicked
-       gtfrase.setText("");
+        gtfrase.setText("");
     }//GEN-LAST:event_gtfraseMouseClicked
 
     /**
      * @param args the command line arguments
      */
- 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btsalvar;

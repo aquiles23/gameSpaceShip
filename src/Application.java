@@ -1,4 +1,3 @@
-
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -32,18 +31,19 @@ public class Application extends JFrame {
     public static void main(String[] args) {
            Cadastro pessoa = new Cadastro();
            Application app = new Application();
-           Map mapa = new Map();
-//           Graphics g = new Graphics()
+           TelasJogo telas = new TelasJogo(pessoa,app);
+       
+           
             
       EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
           
-           TelasJogo telas = new TelasJogo(pessoa,app,mapa);
+          
            telas.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
            telas.setLocationRelativeTo(null);
            telas.setVisible(true);
-            
+    
             }
         });
          
