@@ -1,12 +1,11 @@
 
 import java.awt.Color;
-import java.awt.Graphics;
 import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JWindow;
 
 public class TelasJogo extends javax.swing.JFrame {
 
@@ -14,7 +13,13 @@ public class TelasJogo extends javax.swing.JFrame {
     private Cadastro pessoa;
     private SpaceShip nave;
     private boolean aberto;
+    private JFrame back;
+    public static JLabel points;
+    public static Application score;
+    public static JPanel painel;
+    public static JLabel life;
 
+    public static boolean jogoAberto = false;
   
 
     public boolean isAberto() {
@@ -42,29 +47,53 @@ public class TelasJogo extends javax.swing.JFrame {
     }
 
     public TelasJogo(Cadastro pessoa, Application app) {
-        this.pessoa = pessoa;
+        this.points = new JLabel();
+        this.life = new JLabel();
+        this.back = new JFrame();
         this.app = app;
+        this.pessoa = new Cadastro();
         this.nave = nave;
+        this.painel = new JPanel();
         setTitle("Space Combat Game");
         initComponents();
         setResizable(false);
         this.aberto = true;
+        points.setText("0"); 
+        life.setText(Integer.toString(SpaceShip.vidas));
+        back.setResizable(false);
+ 
         tela1.setVisible(true);
         tela2.setVisible(false);
         tela3.setVisible(false);
-     
-
-       
     }
 
   
 
     public TelasJogo() {
+        this.back = new JFrame();
         initComponents();
         setResizable(false);
 
     }
 
+    public JFrame getBack() {
+        return back;
+    }
+
+    public void setBack(JFrame back) {
+        this.back = back;
+    }
+
+    public JLabel getPoints() {
+        return points;
+    }
+
+    public void setPoints(JLabel points) {
+        this.points = points;
+    }
+
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -399,13 +428,41 @@ public class TelasJogo extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Audio play = new Audio();
+        JLabel lbpontos = new JLabel();
+        JLabel lblvidas = new JLabel();
+        lbpontos.setText("Vidas: ");
+        lblvidas.setText("Pontos: ");
        
-
         if (pessoa.getSalvo()) {
              play.tocar("audio/play.wav");
-            this.aberto = false;
-            this.dispose();      
-            app.setVisible(true);
+            setAberto(false);
+            this.dispose();
+            jogoAberto = true;
+             painel.setBackground(Color.white);
+             back.add(painel);
+            
+             painel.add(lbpontos);
+             painel.add(life);
+             painel.add(lblvidas);
+             painel.add(points);
+             
+             
+             life.setAlignmentX(lblvidas.getAlignmentX()+20);
+             life.setAlignmentY(lblvidas.getAlignmentY()+20);
+             if(TelasJogo.jogoAberto == true){
+              back.setLocationRelativeTo(null);
+              back.setSize(50, 100);
+              back.setTitle("Pontuacao");
+//              back.setBackground(Color.yellow);
+              back.setVisible(true);
+              back.setBackground(Color.red);
+              back.setLocation(new Application().getX()-80, new Application().getY());
+              back.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+           
+             }
+              
+                
+                app.setVisible(true);
         } else {
             JOptionPane.showConfirmDialog(null, "É necessário salvar os dados antes de iniciar o jogo!", "Alerta", JOptionPane.WARNING_MESSAGE);
         }

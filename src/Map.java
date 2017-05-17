@@ -18,6 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.JLabel;
+import javax.swing.JWindow;
 
 public class Map extends JPanel implements ActionListener {
 
@@ -28,6 +29,8 @@ public class Map extends JPanel implements ActionListener {
 
     private final Image background;
     private final SpaceShip spaceship;
+    private JLabel pontos;
+    private JWindow semb;
     private int cont=0;
     
     public Map() {
@@ -38,7 +41,7 @@ public class Map extends JPanel implements ActionListener {
         setDoubleBuffered(true);
         ImageIcon image = new ImageIcon("images/space.jpg");
         this.background = image.getImage();
-
+//  JWindow semb = new JWindow();
         spaceship = new SpaceShip(SPACESHIP_X, SPACESHIP_Y);
         
 
@@ -46,12 +49,10 @@ public class Map extends JPanel implements ActionListener {
         timer_map.start();
         
 
- 
-
     }
+    
 
-
-
+    
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -67,17 +68,19 @@ public class Map extends JPanel implements ActionListener {
 
     }
 int a=0,p=0,b=0,dif=3,l1=50,l2=80;
-
+ int aux =0,controle=0 ;
+ 
     private void draw(Graphics g) throws InterruptedException {
-            
-            
+          
+       //System.out.println(spaceship.vidas);
+       TelasJogo.life.setText(Integer.toString(SpaceShip.vidas));
        
         g.drawImage(spaceship.getImage(), spaceship.getX(), spaceship.getY(), this);
          for(int i=0;i<spaceship.aliens.size();i++){
             g.drawImage(spaceship.aliens.get(i).getImage(), spaceship.aliens.get(i).getX(), spaceship.aliens.get(i).getY(), this);
                spaceship.aliens.get(i).posicionar();
          }
- 
+
        if(spaceship.aux == 1){
 
                 g.drawImage(spaceship.missil.getImage(), spaceship.getX(), spaceship.missil.getY(), this);
@@ -86,15 +89,15 @@ int a=0,p=0,b=0,dif=3,l1=50,l2=80;
                 }
                   spaceship.missil.setX(spaceship.missil.getX());
                   spaceship.missil.setY(spaceship.missil.getY()-80);
-               
-                
-
-    
            
          }
-       
+        for(int i=0;i<spaceship.aliens.size();i++){
+            if(spaceship.aliens.get(i).getY() == 499){
+                spaceship.vidas--;
+            }
+         }
        if(spaceship.cont==0){
-    System.out.println(b);
+   
             for(int i=0;i<dif;i++){   
                 if(p>=400){
                     p=0;
@@ -106,16 +109,13 @@ int a=0,p=0,b=0,dif=3,l1=50,l2=80;
                 spaceship.aliens.get(i).loadImage("images/alien_MEDIUM.png");   
                          
             }
-            if(spaceship.q > 100){
+            if(spaceship.q >= 100){
                 spaceship.aliens.get(i).loadImage("images/alien_HARD.png");   
                          
             }
            
             }   
-//       else if(spaceship.q >=l2){
-//                dif = dif+2;
-//                
-//            }
+
             spaceship.cont=1;
             //b++;
             if(spaceship.q >= l1){

@@ -13,14 +13,17 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JWindow;
 
 
 public class Application extends JFrame {
-    
+       
     public Application() {
-
+        
         add(new Map());
-
+        
         setSize(Game.getWidth(), Game.getHeight());
 
         setTitle("Space Combat Game");
@@ -33,21 +36,20 @@ public class Application extends JFrame {
     public static void main(String[] args) {
            Cadastro pessoa = new Cadastro();
            Application app = new Application();
-           TelasJogo telas = new TelasJogo(pessoa,app);
+           TelasJogo telas = new TelasJogo(pessoa,app );
            Audio inicial = new Audio();
-           
-            
+   
+          
       EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-         
+           
            inicial.tocar("audio/ufo.wav");
-  
            telas.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
            telas.setLocationRelativeTo(null);
            telas.setVisible(true);
-    
-            }
+         
+          }
         });
          
        

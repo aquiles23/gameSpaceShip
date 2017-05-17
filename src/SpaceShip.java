@@ -1,27 +1,52 @@
 
-import static com.sun.java.accessibility.util.AWTEventMonitor.addKeyListener;
-import java.awt.Graphics;
-import java.awt.List;
-import java.awt.event.ActionListener;
+import java.awt.Color;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JWindow;
 import javax.swing.Timer;
 
 public class SpaceShip extends Sprite {
     
     private static final int MAX_SPEED_X = 2;
     private static final int MAX_SPEED_Y = 1;
-   
+    
     private int speed_x;
     private int speed_y;
     protected Missil missil;
     protected ArrayList <Alien> aliens;
     protected Audio tiro;
+    protected  static  int vidas;
+    protected  int pontos;
+    protected Timer t = null;
+    protected Application app;
     protected int aux,cont=0,q=0;
 
+    
+    
+    public SpaceShip(int x, int y) {
+        super(x, y);
+        this.vidas = 5;
+        this.app = app;
+        this.aliens = new ArrayList();
+        this.aux=0;
+        this.missil = new Missil(x,y);
+        this.pontos = 0;
+        this.tiro = new Audio();
+        initSpaceShip();
+    }
     public int getSpeed_x() {
         return speed_x;
+    }
+
+    public int getPontos() {
+        return pontos;
+    }
+
+    public void setPontos(int pontos) {
+        this.pontos = pontos;
     }
 
     public void setSpeed_x(int speed_x) {
@@ -53,14 +78,6 @@ public class SpaceShip extends Sprite {
     }
     
 
-    public SpaceShip(int x, int y) {
-        super(x, y);
-         aliens = new ArrayList();
-        aux=0;
-        missil = new Missil(x,y);
-       tiro = new Audio();
-        initSpaceShip();
-    }
 
 
     private void initSpaceShip() {
@@ -132,16 +149,22 @@ public class SpaceShip extends Sprite {
 
               for(int i=0;i<aliens.size();i++){
                   
-              if((aliens.get(i).getX() == missil.getX()) || (aliens.get(i).getX()+1 == missil.getX()) || (aliens.get(i).getX() == missil.getX()+2)
+              if(((aliens.get(i).getX() == missil.getX()-2) || (aliens.get(i).getX() == missil.getX()-1) || (aliens.get(i).getX() == missil.getX()) || (aliens.get(i).getX()+1 == missil.getX()) || (aliens.get(i).getX() == missil.getX()+2)
                       || (aliens.get(i).getX()+3 == missil.getX()) || (aliens.get(i).getX()+4 == missil.getX()) || (aliens.get(i).getX()+5 == missil.getX())
                       || (aliens.get(i).getX()+6 == missil.getX()) || (aliens.get(i).getX()+7 == missil.getX()) || (aliens.get(i).getX()+8 == missil.getX())
                       || (aliens.get(i).getX()+9 == missil.getX()) || (aliens.get(i).getX()+10 == missil.getX())|| (aliens.get(i).getX()+11 == missil.getX())
                       || (aliens.get(i).getX()+12 == missil.getX()) || (aliens.get(i).getX()+13 == missil.getX()) || (aliens.get(i).getX()+14 == missil.getX())
                       ||(aliens.get(i).getX()+15 == missil.getX()) || (aliens.get(i).getX()+16 == missil.getX()) || (aliens.get(i).getX()+17 == missil.getX())
-                      || (aliens.get(i).getX()+18 == missil.getX()) || (aliens.get(i).getX()+19 == missil.getX()) || (aliens.get(i).getX()+20 == missil.getX())){
-                      aliens.get(i).loadImage("images/explosion.png");   
+                      || (aliens.get(i).getX()+18 == missil.getX()) || (aliens.get(i).getX()+19 == missil.getX()) || (aliens.get(i).getX()+20 == missil.getX())) && (aliens.get(i).getY() < missil.getY())){
+                    
+                    aliens.get(i).loadImage("images/explosion.png");
+//                    Timer t = null;
+//                    t.start();
                       aliens.remove(i);
+                      pontos++;
+                      TelasJogo.points.setText(Integer.toString(pontos));
                       
+//                      System.out.println(pontos);
                       q++;
                       if(q==50){
                           cont=0;
@@ -162,6 +185,8 @@ public class SpaceShip extends Sprite {
             
                 
               }
+//    
+//               
         
         }
         
