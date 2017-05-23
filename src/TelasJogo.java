@@ -1,6 +1,11 @@
 
 import java.awt.Color;
-import javax.swing.JFrame;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -11,10 +16,10 @@ public class TelasJogo extends javax.swing.JFrame {
     protected static Cadastro pessoa;
     private SpaceShip nave;
     private boolean aberto;
-    public static JFrame back;
-    public static JLabel points;
+//    public static JFrame back;
+//    public static JLabel points;
     public static JPanel painel;
-    public static JLabel life;
+//    public static JLabel life;
     public static boolean jogoAberto = false;
   
 
@@ -43,9 +48,9 @@ public class TelasJogo extends javax.swing.JFrame {
     }
 
     public TelasJogo(Cadastro pessoa, Application app) {
-        this.points = new JLabel();
-        this.life = new JLabel();
-        this.back = new JFrame();
+//        this.points = new JLabel();
+//        this.life = new JLabel();
+//        this.back = new JFrame();
         this.app = app;
         this.pessoa = new Cadastro();
         this.nave = nave;
@@ -54,9 +59,9 @@ public class TelasJogo extends javax.swing.JFrame {
         initComponents();
         setResizable(false);
         this.aberto = true;
-        points.setText("0"); 
-        life.setText(Integer.toString(SpaceShip.vidas));
-        back.setResizable(false);
+//        points.setText("0"); 
+//        life.setText(Integer.toString(SpaceShip.vidas));
+//        back.setResizable(false);
  
         tela1.setVisible(true);
         tela2.setVisible(false);
@@ -69,27 +74,27 @@ public class TelasJogo extends javax.swing.JFrame {
   
 
     public TelasJogo() {
-        this.back = new JFrame();
+//        this.back = new JFrame();
         initComponents();
         setResizable(false);
 
     }
 
-    public JFrame getBack() {
-        return back;
-    }
-
-    public void setBack(JFrame back) {
-        this.back = back;
-    }
-
-    public JLabel getPoints() {
-        return points;
-    }
-
-    public void setPoints(JLabel points) {
-        this.points = points;
-    }
+//    public JFrame getBack() {
+//        return back;
+//    }
+//
+//    public void setBack(JFrame back) {
+//        this.back = back;
+//    }
+//
+//    public JLabel getPoints() {
+//        return points;
+//    }
+//
+//    public void setPoints(JLabel points) {
+//        this.points = points;
+//    }
 
     
 
@@ -116,10 +121,10 @@ public class TelasJogo extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         voltar = new javax.swing.JLabel();
         tela4 = new javax.swing.JPanel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        rank = new javax.swing.JList<>();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        rank = new javax.swing.JTextPane();
         tela2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
@@ -180,20 +185,21 @@ public class TelasJogo extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addGap(40, 40, 40))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tela1Layout.createSequentialGroup()
-                        .addGroup(tela1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel8)
-                            .addGroup(tela1Layout.createSequentialGroup()
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(80, 80, 80)
-                                .addComponent(tut, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tela1Layout.createSequentialGroup()
-                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(79, 79, 79))))
+                        .addComponent(jLabel8)
+                        .addGap(337, 337, 337))))
             .addGroup(tela1Layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(tela1Layout.createSequentialGroup()
+                .addGap(48, 48, 48)
+                .addGroup(tela1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(tela1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tut, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(59, 59, 59))
         );
         tela1Layout.setVerticalGroup(
             tela1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -329,8 +335,6 @@ public class TelasJogo extends javax.swing.JFrame {
 
         tela4.setBackground(new java.awt.Color(0, 153, 153));
 
-        jScrollPane3.setViewportView(rank);
-
         jLabel9.setFont(new java.awt.Font("Apple Chancery", 0, 36)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("           Ranking");
@@ -342,32 +346,33 @@ public class TelasJogo extends javax.swing.JFrame {
             }
         });
 
+        jScrollPane4.setViewportView(rank);
+
         javax.swing.GroupLayout tela4Layout = new javax.swing.GroupLayout(tela4);
         tela4.setLayout(tela4Layout);
         tela4Layout.setHorizontalGroup(
             tela4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tela4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(tela4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tela4Layout.createSequentialGroup()
-                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tela4Layout.createSequentialGroup()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(79, 79, 79))))
-            .addGroup(tela4Layout.createSequentialGroup()
                 .addGap(184, 184, 184)
                 .addComponent(jLabel10)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tela4Layout.createSequentialGroup()
+                .addContainerGap(76, Short.MAX_VALUE)
+                .addGroup(tela4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tela4Layout.createSequentialGroup()
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(66, 66, 66)))
+                .addContainerGap())
         );
         tela4Layout.setVerticalGroup(
             tela4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tela4Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jLabel9)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(34, 34, 34)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(47, Short.MAX_VALUE))
         );
@@ -520,26 +525,26 @@ public class TelasJogo extends javax.swing.JFrame {
             this.dispose();
             jogoAberto = true;
              painel.setBackground(Color.white);
-             back.add(painel);
+//             back.add(painel);
             
-             painel.add(lbpontos);
-             painel.add(life);
-             painel.add(lblvidas);
-             painel.add(points);
+//             painel.add(lbpontos);
+//             painel.add(life);
+//             painel.add(lblvidas);
+//             painel.add(points);
              
-             
-             life.setAlignmentX(lblvidas.getAlignmentX()+20);
-             life.setAlignmentY(lblvidas.getAlignmentY()+20);
-             if(TelasJogo.jogoAberto == true){
-              back.setLocationRelativeTo(null);
-              back.setSize(50, 100);
-              back.setTitle("Pontuacao");
-
-              back.setVisible(true);
-              back.setLocation(new Application().getX()-80, new Application().getY());
-              back.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-           
-             }
+//             
+//             life.setAlignmentX(lblvidas.getAlignmentX()+20);
+//             life.setAlignmentY(lblvidas.getAlignmentY()+20);
+//             if(TelasJogo.jogoAberto == true){
+//              back.setLocationRelativeTo(null);
+//              back.setSize(50, 100);
+//              back.setTitle("Pontuacao");
+//
+//              back.setVisible(true);
+//              back.setLocation(new Application().getX()-80, new Application().getY());
+//              back.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//           
+//             }
               
                 
                 app.setVisible(true);
@@ -566,6 +571,36 @@ public class TelasJogo extends javax.swing.JFrame {
        tela3.setVisible(false);
        tela1.setVisible(false);
        
+       FileReader arq = null;
+        try {
+            arq = new FileReader("dados.txt");
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(TelasJogo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+          BufferedReader lerArq = new BufferedReader(arq);
+ 
+      String linha = null;
+        try {
+            linha = lerArq.readLine();
+        } catch (IOException ex) {
+            Logger.getLogger(TelasJogo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+      while (linha != null) {
+ 
+        rank.setText(rank.getText()+linha+"\n");
+           try {
+               linha = lerArq.readLine(); // lê da segunda até a última linha
+           } catch (IOException ex) {
+               Logger.getLogger(TelasJogo.class.getName()).log(Level.SEVERE, null, ex);
+           }
+      }
+       
+        try {
+            arq.close();
+        } catch (IOException ex) {
+            Logger.getLogger(TelasJogo.class.getName()).log(Level.SEVERE, null, ex);
+        }
       
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -577,6 +612,7 @@ public class TelasJogo extends javax.swing.JFrame {
     private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
         tela4.setVisible(false);
         tela1.setVisible(true);
+        rank.setText("");
     }//GEN-LAST:event_jLabel10MouseClicked
 
     /**
@@ -603,9 +639,9 @@ public class TelasJogo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JList<String> rank;
+    private javax.swing.JTextPane rank;
     private javax.swing.JPanel tela1;
     private javax.swing.JPanel tela2;
     private javax.swing.JPanel tela3;

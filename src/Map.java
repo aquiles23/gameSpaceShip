@@ -17,7 +17,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 public class Map extends JPanel implements ActionListener {
 
@@ -32,7 +34,7 @@ public class Map extends JPanel implements ActionListener {
     private boolean status;
     private Application app;
     private Cadastro pessoa;
-    public FileWriter arq;
+    public static  FileWriter arq;
     private int cont=0;
     
     public Map(Application app,Cadastro pessoa) {
@@ -70,10 +72,10 @@ public class Map extends JPanel implements ActionListener {
         Toolkit.getDefaultToolkit().sync();
 
     }
-int p=0,dif=3,l1=50;
+int p=0,dif=3,l1=50,x,y;
     private void draw(Graphics g) throws InterruptedException {
 
-       TelasJogo.life.setText(Integer.toString(SpaceShip.vidas));
+//       TelasJogo.life.setText(Integer.toString(SpaceShip.vidas));
        g.drawImage(spaceship.getImage(), spaceship.getX(), spaceship.getY(), this);
          for(int i=0;i<spaceship.aliens.size();i++){
             g.drawImage(spaceship.aliens.get(i).getImage(), spaceship.aliens.get(i).getX(), spaceship.aliens.get(i).getY(), this);
@@ -86,7 +88,7 @@ int p=0,dif=3,l1=50;
                 }
                   spaceship.missil.setX(spaceship.missil.getX());
                   spaceship.missil.setY(spaceship.missil.getY()-80);
-           
+         
          }
         for(int i=0;i<spaceship.aliens.size();i++){
             if(spaceship.aliens.get(i).getY() == 499){
@@ -99,8 +101,10 @@ int p=0,dif=3,l1=50;
                     p=0;
                 }else{
                     p+=40;
-                }
-                spaceship.aliens.add(new Alien(p,0));
+                }   
+                    x = (int)(Math.random()*450);
+                    y= (int) (Math.random()*150);                   
+                    spaceship.aliens.add(new Alien(x,y));
 
                 if(spaceship.q > 50 && spaceship.q < 100){
                     spaceship.aliens.get(i).loadImage("images/alien_MEDIUM.png");                
@@ -120,25 +124,41 @@ int p=0,dif=3,l1=50;
        }
        if(SpaceShip.vidas <= 0){
           this.status=false;
-          TelasJogo.back.dispose();
+//          TelasJogo.back.dispose();
           drawGameOver(g);
           gravaArq();
        }
-       if(spaceship.pontos > 5){
-          TelasJogo.back.dispose();
+       if(spaceship.pontos > 300){
+//          TelasJogo.back.dispose();
            dranMissionAccomplished(g);
            gravaArq();
        }
+       pontuacao(g);
 }
+    void pontuacao(Graphics g){
+        String auxLife = Integer.toString(SpaceShip.vidas);
+        String auxPontos = Integer.toString(SpaceShip.pontos);
+        
+         String message = "Vidas: "+auxLife;
+         String message2 ="Pontuacao: "+auxPontos;
+        Font font = new Font("Helvetica", Font.BOLD, 14);
+        FontMetrics metric = getFontMetrics(font);
+
+        g.setColor(Color.white);
+        g.setFont(font);
+        g.drawString(message, (metric.stringWidth(message))-40, Game.getHeight()-480);
+        g.drawString(message2, (metric.stringWidth(message))-40, Game.getHeight()-455);   
+    
+    }
      
     void gravaArq(){
           try {
            arq = new FileWriter("dados.txt",true);
         } catch (IOException ex) {
-            Logger.getLogger(TelasJogo.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null,"Erro","Não foi encontrado o arquivos contendo os dados!",JOptionPane.PLAIN_MESSAGE);
         }
           PrintWriter gravar = new PrintWriter(arq);
-          gravar.println(TelasJogo.pessoa.getApelido()+"------"+SpaceShip.pontos);
+          gravar.println(TelasJogo.pessoa.getApelido()+" __________________ "+SpaceShip.pontos);
              try {
             arq.close();
         } catch (IOException ex) {
@@ -178,8 +198,15 @@ int p=0,dif=3,l1=50;
         g.setFont(font);
         g.drawString(message, (Game.getWidth() - metric.stringWidth(message)) / 2, Game.getHeight() / 2);
         
+       
         timer_map.stop();
         
+        String message3 = "Enter para voltar ao menu";
+      
+        
+  
+        g.setFont(font);
+        g.drawString(message3,50,200);
 //        TelasJogo tela = new TelasJogo();
 //        tela.setLocationRelativeTo(null);
 //        tela.setResizable(false);

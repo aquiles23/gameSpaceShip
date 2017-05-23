@@ -1,11 +1,6 @@
 
-import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JWindow;
 import javax.swing.Timer;
 
 public class SpaceShip extends Sprite {
@@ -22,12 +17,14 @@ public class SpaceShip extends Sprite {
     protected  static int pontos;
     protected Timer t = null;
     protected Application app;
+    protected static boolean vivo;
     protected int aux,cont=0,q=0;
 
     
     
     public SpaceShip(int x, int y) {
         super(x, y);
+        this.vivo = true;
         this.vidas = 5;
         this.app = app;
         this.aliens = new ArrayList();
@@ -148,7 +145,7 @@ public class SpaceShip extends Sprite {
               }
 
               for(int i=0;i<aliens.size();i++){
-                  
+             
               if(((aliens.get(i).getX() == missil.getX()-2) || (aliens.get(i).getX() == missil.getX()-1) || (aliens.get(i).getX() == missil.getX()) || (aliens.get(i).getX()+1 == missil.getX()) || (aliens.get(i).getX() == missil.getX()+2)
                       || (aliens.get(i).getX()+3 == missil.getX()) || (aliens.get(i).getX()+4 == missil.getX()) || (aliens.get(i).getX()+5 == missil.getX())
                       || (aliens.get(i).getX()+6 == missil.getX()) || (aliens.get(i).getX()+7 == missil.getX()) || (aliens.get(i).getX()+8 == missil.getX())
@@ -161,8 +158,9 @@ public class SpaceShip extends Sprite {
 //                    Timer t = null;
 //                    t.start();
                       aliens.remove(i);
+//                      missil.setY(0);
                       pontos++;
-                      TelasJogo.points.setText(Integer.toString(pontos));
+//                      TelasJogo.points.setText(Integer.toString(pontos));
                       
 //                      System.out.println(pontos);
                       q++;
@@ -178,9 +176,12 @@ public class SpaceShip extends Sprite {
                         if(q==200){
                           cont=0;   
                       }
-                      if(aliens.size() == 0){
+                        if(aliens.isEmpty()){
                           cont=0;
                       }
+//                      if(aliens.size() == 0){
+//                          cont=0;
+//                      }
                  }
             
                 

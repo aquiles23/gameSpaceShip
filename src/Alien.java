@@ -4,9 +4,11 @@ import static java.lang.Math.random;
 
 public class Alien extends Sprite {
     int s1,s2;
+    
     public Alien(int x,int y) {
-       
+    
         super(x,y);
+     
         s1=x;
         s2=y;
        
