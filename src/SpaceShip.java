@@ -19,7 +19,7 @@ public class SpaceShip extends Sprite {
     protected ArrayList <Alien> aliens;
     protected Audio tiro;
     protected  static  int vidas;
-    protected  int pontos;
+    protected  static int pontos;
     protected Timer t = null;
     protected Application app;
     protected int aux,cont=0,q=0;
