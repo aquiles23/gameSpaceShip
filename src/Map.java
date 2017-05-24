@@ -1,5 +1,6 @@
 
 import java.awt.Color;
+import java.awt.Event;
 import java.awt.Graphics;
 import java.awt.Font;
 import java.awt.FontMetrics;
@@ -17,7 +18,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -25,7 +25,7 @@ public class Map extends JPanel implements ActionListener {
 
     private final int SPACESHIP_X = 220;
     private final int SPACESHIP_Y = 430;
-    private final Timer timer_map;
+    protected static  Timer timer_map;
 
 
     private final Image background;
@@ -34,6 +34,7 @@ public class Map extends JPanel implements ActionListener {
     private boolean status;
     private Application app;
     private Cadastro pessoa;
+    public boolean paused;
     public static  FileWriter arq;
     private int cont=0;
     
@@ -42,13 +43,12 @@ public class Map extends JPanel implements ActionListener {
         this.pessoa = pessoa;
         this.status = true;
         addKeyListener(new KeyListerner());
-
+        paused = false;
         setFocusable(true);
         setDoubleBuffered(true);
         ImageIcon image = new ImageIcon("images/space.jpg");
         this.background = image.getImage();
         spaceship = new SpaceShip(SPACESHIP_X, SPACESHIP_Y);
-        
 
         timer_map = new Timer(Game.getDelay(), this);
         timer_map.start();
@@ -72,10 +72,9 @@ public class Map extends JPanel implements ActionListener {
         Toolkit.getDefaultToolkit().sync();
 
     }
-int p=0,dif=3,l1=50,x,y;
+int p=0,dif=3,l1=50,x=0,y;
     private void draw(Graphics g) throws InterruptedException {
 
-//       TelasJogo.life.setText(Integer.toString(SpaceShip.vidas));
        g.drawImage(spaceship.getImage(), spaceship.getX(), spaceship.getY(), this);
          for(int i=0;i<spaceship.aliens.size();i++){
             g.drawImage(spaceship.aliens.get(i).getImage(), spaceship.aliens.get(i).getX(), spaceship.aliens.get(i).getY(), this);
@@ -103,7 +102,7 @@ int p=0,dif=3,l1=50,x,y;
                     p+=40;
                 }   
                     x = (int)(Math.random()*450);
-                    y= (int) (Math.random()*150);                   
+                    y=  (int)(Math.random()*20);
                     spaceship.aliens.add(new Alien(x,y));
 
                 if(spaceship.q > 50 && spaceship.q < 100){
@@ -124,16 +123,27 @@ int p=0,dif=3,l1=50,x,y;
        }
        if(SpaceShip.vidas <= 0){
           this.status=false;
-//          TelasJogo.back.dispose();
+
           drawGameOver(g);
           gravaArq();
        }
        if(spaceship.pontos > 300){
-//          TelasJogo.back.dispose();
+
            dranMissionAccomplished(g);
            gravaArq();
        }
        pontuacao(g);
+       
+       for(int i=0;i<spaceship.aliens.size();i++ ){
+           if(spaceship.aliens.get(i).getBounds().intersects(spaceship.getBounds())){
+              spaceship.loadImage("images/explosion.png");
+              SpaceShip.vidas = 0;
+           }
+       }
+      
+       if(SpaceShip.pausado == true){
+           pausa(g);
+       }
 }
     void pontuacao(Graphics g){
         String auxLife = Integer.toString(SpaceShip.vidas);
@@ -141,6 +151,7 @@ int p=0,dif=3,l1=50,x,y;
         
          String message = "Vidas: "+auxLife;
          String message2 ="Pontuacao: "+auxPontos;
+         String message3 ="[P] pausar";
         Font font = new Font("Helvetica", Font.BOLD, 14);
         FontMetrics metric = getFontMetrics(font);
 
@@ -148,7 +159,7 @@ int p=0,dif=3,l1=50,x,y;
         g.setFont(font);
         g.drawString(message, (metric.stringWidth(message))-40, Game.getHeight()-480);
         g.drawString(message2, (metric.stringWidth(message))-40, Game.getHeight()-455);   
-    
+        g.drawString(message3, (metric.stringWidth(message))+360, Game.getHeight()-480);   
     }
      
     void gravaArq(){
@@ -175,7 +186,8 @@ int p=0,dif=3,l1=50,x,y;
     }
 
     private void dranMissionAccomplished(Graphics g) {
-
+        Audio vitoria = new Audio();
+        vitoria.tocar("audio/vitoria.wav");
         String message = "Parabéns,voce salvou o seu planeta";
         Font font = new Font("Helvetica", Font.BOLD, 28);
         FontMetrics metric = getFontMetrics(font);
@@ -187,32 +199,44 @@ int p=0,dif=3,l1=50,x,y;
         timer_map.stop();
        
     }
-
+      
     private void drawGameOver(Graphics g) {
-
+        Audio loser = new Audio();
+        loser.tocar("audio/derrota.wav");
         String message = "Game Over";
         Font font = new Font("Helvetica", Font.BOLD, 32);
+        FontMetrics metric = getFontMetrics(font);
+        g.setColor(Color.white);
+        g.setFont(font);
+        g.drawString(message, (Game.getWidth() - metric.stringWidth(message)) / 2, Game.getHeight() / 2);
+        
+        msgDerrota(g);
+          
+        timer_map.stop();
+
+      
+
+    }
+    private void msgDerrota(Graphics g){
+         String message3 = "Seu planeta foi invadido.";
+         Font font = new Font("Luminari", Font.BOLD, 22);
+         FontMetrics metric = getFontMetrics(font);
+         g.setColor(Color.white);
+         g.setFont(font);
+         g.setFont(font);
+         g.drawString(message3,150,350);
+    }
+      public void pausa(Graphics g){
+    
+        String message = "Jogo pausado!";
+        Font font = new Font("Helvetica", Font.BOLD, 28);
         FontMetrics metric = getFontMetrics(font);
 
         g.setColor(Color.white);
         g.setFont(font);
         g.drawString(message, (Game.getWidth() - metric.stringWidth(message)) / 2, Game.getHeight() / 2);
-        
-       
-        timer_map.stop();
-        
-        String message3 = "Enter para voltar ao menu";
-      
-        
-  
-        g.setFont(font);
-        g.drawString(message3,50,200);
-//        TelasJogo tela = new TelasJogo();
-//        tela.setLocationRelativeTo(null);
-//        tela.setResizable(false);
-//        tela.setVisible(true);
-    }
 
+}
  
     private void updateSpaceship() {
         spaceship.move();

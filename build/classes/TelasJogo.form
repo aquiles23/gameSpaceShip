@@ -290,7 +290,6 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="cc" green="cc" red="cc" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Digite o nome do seu personagem"/>
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="gtnomeMouseClicked"/>
@@ -322,7 +321,7 @@
                   <Color blue="cc" green="cc" red="cc" type="rgb"/>
                 </Property>
                 <Property name="rows" type="int" value="5"/>
-                <Property name="text" type="java.lang.String" value="Digite uma frase "/>
+                <Property name="text" type="java.lang.String" value="&#xa;"/>
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="gtfraseMouseClicked"/>
@@ -374,7 +373,7 @@
                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               </Group>
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace pref="76" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel9" min="-2" pref="424" max="-2" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
@@ -502,7 +501,7 @@
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="rows" type="int" value="5"/>
-                <Property name="text" type="java.lang.String" value="Destrua a maior quantidade de &#xa;alienigenas que conseguir e &#xa;salve o planeta Ecrypton.&#xa;Tome cuidado,a cada nivel os&#xa;alienigenas v&#xe3;o ficando mais &#xa;furiosos!&#xa;&#xa;&#xa;&#xa;"/>
+                <Property name="text" type="java.lang.String" value="Destrua todos os alien&#xed;genas que&#xa;est&#xe3;o invadindo seu planeta.&#xa;Tome cuidado, a medida que voc&#xea;&#xa;os mata,eles v&#xe3;o ficando mais&#xa; furiosos.&#xa;&#xa;Boa sorte!&#xa;"/>
               </Properties>
             </Component>
           </SubComponents>

@@ -16,12 +16,25 @@ public class TelasJogo extends javax.swing.JFrame {
     protected static Cadastro pessoa;
     private SpaceShip nave;
     private boolean aberto;
-//    public static JFrame back;
-//    public static JLabel points;
     public static JPanel painel;
-//    public static JLabel life;
     public static boolean jogoAberto = false;
-  
+
+    public TelasJogo(Cadastro pessoa, Application app) {
+        this.app = app;
+        this.pessoa = new Cadastro();
+        this.nave = nave;
+        this.painel = new JPanel();
+        setTitle("Space Combat Game");
+        initComponents();
+        setResizable(false);
+        this.aberto = true;
+
+        tela1.setVisible(true);
+        tela2.setVisible(false);
+        tela3.setVisible(false);
+        tela4.setVisible(false);
+
+    }
 
     public boolean isAberto() {
         return aberto;
@@ -47,56 +60,12 @@ public class TelasJogo extends javax.swing.JFrame {
         this.pessoa = pessoa;
     }
 
-    public TelasJogo(Cadastro pessoa, Application app) {
-//        this.points = new JLabel();
-//        this.life = new JLabel();
-//        this.back = new JFrame();
-        this.app = app;
-        this.pessoa = new Cadastro();
-        this.nave = nave;
-        this.painel = new JPanel();
-        setTitle("Space Combat Game");
-        initComponents();
-        setResizable(false);
-        this.aberto = true;
-//        points.setText("0"); 
-//        life.setText(Integer.toString(SpaceShip.vidas));
-//        back.setResizable(false);
- 
-        tela1.setVisible(true);
-        tela2.setVisible(false);
-        tela3.setVisible(false);
-        tela4.setVisible(false);
-      
-     
-    }
-
-  
-
     public TelasJogo() {
-//        this.back = new JFrame();
+
         initComponents();
         setResizable(false);
 
     }
-
-//    public JFrame getBack() {
-//        return back;
-//    }
-//
-//    public void setBack(JFrame back) {
-//        this.back = back;
-//    }
-//
-//    public JLabel getPoints() {
-//        return points;
-//    }
-//
-//    public void setPoints(JLabel points) {
-//        this.points = points;
-//    }
-
-    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -231,7 +200,6 @@ public class TelasJogo extends javax.swing.JFrame {
         jLabel6.setText("Nome:");
 
         gtnome.setForeground(new java.awt.Color(204, 204, 204));
-        gtnome.setText("Digite o nome do seu personagem");
         gtnome.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 gtnomeMouseClicked(evt);
@@ -250,7 +218,7 @@ public class TelasJogo extends javax.swing.JFrame {
         gtfrase.setColumns(20);
         gtfrase.setForeground(new java.awt.Color(204, 204, 204));
         gtfrase.setRows(5);
-        gtfrase.setText("Digite uma frase ");
+        gtfrase.setText("\n");
         gtfrase.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 gtfraseMouseClicked(evt);
@@ -357,7 +325,7 @@ public class TelasJogo extends javax.swing.JFrame {
                 .addComponent(jLabel10)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tela4Layout.createSequentialGroup()
-                .addContainerGap(76, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(tela4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tela4Layout.createSequentialGroup()
@@ -386,7 +354,7 @@ public class TelasJogo extends javax.swing.JFrame {
         jTextArea1.setFont(new java.awt.Font("Apple Chancery", 0, 24)); // NOI18N
         jTextArea1.setForeground(new java.awt.Color(255, 255, 255));
         jTextArea1.setRows(5);
-        jTextArea1.setText("Destrua a maior quantidade de \nalienigenas que conseguir e \nsalve o planeta Ecrypton.\nTome cuidado,a cada nivel os\nalienigenas vão ficando mais \nfuriosos!\n\n\n\n");
+        jTextArea1.setText("Destrua todos os alienígenas que\nestão invadindo seu planeta.\nTome cuidado, a medida que você\nos mata,eles vão ficando mais\n furiosos.\n\nBoa sorte!\n");
         jScrollPane1.setViewportView(jTextArea1);
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/v.png"))); // NOI18N
@@ -490,9 +458,7 @@ public class TelasJogo extends javax.swing.JFrame {
     }//GEN-LAST:event_gtnomeActionPerformed
 
     private void btsalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btsalvarActionPerformed
-      
-     
-       
+
         boolean aux = false;
         if (gtnome.getText().equals("") || gtfrase.getText().equals("")) {
             aux = false;
@@ -503,12 +469,12 @@ public class TelasJogo extends javax.swing.JFrame {
             pessoa.setApelido(gtnome.getText());
             pessoa.setFrase(gtfrase.getText());
             pessoa.setSalvo(true);
-            
-            JOptionPane.showConfirmDialog(null, "Dados salvos com sucesso!", "Confirmação de Cadastro", JOptionPane.PLAIN_MESSAGE);
+
+            JOptionPane.showConfirmDialog(null, "Dados salvos com sucesso!", "Confirmação de Registro", JOptionPane.PLAIN_MESSAGE);
         } else {
-            JOptionPane.showConfirmDialog(null, "Preencha todos os campos do cadastro!", "Erro de Cadastro", JOptionPane.PLAIN_MESSAGE);
+            JOptionPane.showConfirmDialog(null, "Preencha todos os campos apresentados!", "Erro de Registro", JOptionPane.PLAIN_MESSAGE);
         }
-      
+
 
     }//GEN-LAST:event_btsalvarActionPerformed
 
@@ -518,36 +484,15 @@ public class TelasJogo extends javax.swing.JFrame {
         JLabel lblvidas = new JLabel();
         lbpontos.setText("Vidas: ");
         lblvidas.setText("Pontos: ");
-       
+
         if (pessoa.getSalvo()) {
-             play.tocar("audio/play.wav");
+            play.tocar("audio/play.wav");
             setAberto(false);
             this.dispose();
             jogoAberto = true;
-             painel.setBackground(Color.white);
-//             back.add(painel);
-            
-//             painel.add(lbpontos);
-//             painel.add(life);
-//             painel.add(lblvidas);
-//             painel.add(points);
-             
-//             
-//             life.setAlignmentX(lblvidas.getAlignmentX()+20);
-//             life.setAlignmentY(lblvidas.getAlignmentY()+20);
-//             if(TelasJogo.jogoAberto == true){
-//              back.setLocationRelativeTo(null);
-//              back.setSize(50, 100);
-//              back.setTitle("Pontuacao");
-//
-//              back.setVisible(true);
-//              back.setLocation(new Application().getX()-80, new Application().getY());
-//              back.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//           
-//             }
-              
-                
-                app.setVisible(true);
+            painel.setBackground(Color.white);
+
+            app.setVisible(true);
         } else {
             JOptionPane.showConfirmDialog(null, "É necessário salvar os dados antes de iniciar o jogo!", "Alerta", JOptionPane.WARNING_MESSAGE);
         }
@@ -566,42 +511,42 @@ public class TelasJogo extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-       tela4.setVisible(true);
-       tela2.setVisible(false);
-       tela3.setVisible(false);
-       tela1.setVisible(false);
-       
-       FileReader arq = null;
+        tela4.setVisible(true);
+        tela2.setVisible(false);
+        tela3.setVisible(false);
+        tela1.setVisible(false);
+
+        FileReader arq = null;
         try {
             arq = new FileReader("dados.txt");
         } catch (FileNotFoundException ex) {
             Logger.getLogger(TelasJogo.class.getName()).log(Level.SEVERE, null, ex);
         }
-          BufferedReader lerArq = new BufferedReader(arq);
- 
-      String linha = null;
+        BufferedReader lerArq = new BufferedReader(arq);
+
+        String linha = null;
         try {
             linha = lerArq.readLine();
         } catch (IOException ex) {
             Logger.getLogger(TelasJogo.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-      while (linha != null) {
- 
-        rank.setText(rank.getText()+linha+"\n");
-           try {
-               linha = lerArq.readLine(); // lê da segunda até a última linha
-           } catch (IOException ex) {
-               Logger.getLogger(TelasJogo.class.getName()).log(Level.SEVERE, null, ex);
-           }
-      }
-       
+        while (linha != null) {
+
+            rank.setText(rank.getText() + linha + "\n");
+            try {
+                linha = lerArq.readLine();
+            } catch (IOException ex) {
+                Logger.getLogger(TelasJogo.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
         try {
             arq.close();
         } catch (IOException ex) {
             Logger.getLogger(TelasJogo.class.getName()).log(Level.SEVERE, null, ex);
         }
-      
+
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void voltarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_voltarMouseClicked
@@ -615,9 +560,6 @@ public class TelasJogo extends javax.swing.JFrame {
         rank.setText("");
     }//GEN-LAST:event_jLabel10MouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btsalvar;

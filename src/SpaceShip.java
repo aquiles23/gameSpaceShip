@@ -10,6 +10,7 @@ public class SpaceShip extends Sprite {
     
     private int speed_x;
     private int speed_y;
+    protected static boolean pausado;
     protected Missil missil;
     protected ArrayList <Alien> aliens;
     protected Audio tiro;
@@ -32,6 +33,7 @@ public class SpaceShip extends Sprite {
         this.missil = new Missil(x,y);
         this.pontos = 0;
         this.tiro = new Audio();
+        this.pausado = false;
         initSpaceShip();
     }
     public int getSpeed_x() {
@@ -110,7 +112,6 @@ public class SpaceShip extends Sprite {
         y += speed_y;
         
     }
-
     public void keyPressed(KeyEvent e) throws InterruptedException {
 
         int key = e.getKeyCode();
@@ -135,6 +136,15 @@ public class SpaceShip extends Sprite {
         if (key == KeyEvent.VK_DOWN) {
             speed_y = MAX_SPEED_Y;
         }
+        if(key == KeyEvent.VK_P){
+            if(pausado == false){
+                Map.timer_map.stop();
+                this.pausado = true;
+            }else if(pausado == true){ 
+                Map.timer_map.start();
+                this.pausado = false;        
+            }
+        }
            if(key == KeyEvent.VK_SPACE){
               aux = 1;
                
@@ -155,14 +165,9 @@ public class SpaceShip extends Sprite {
                       || (aliens.get(i).getX()+18 == missil.getX()) || (aliens.get(i).getX()+19 == missil.getX()) || (aliens.get(i).getX()+20 == missil.getX())) && (aliens.get(i).getY() < missil.getY())){
                     
                     aliens.get(i).loadImage("images/explosion.png");
-//                    Timer t = null;
-//                    t.start();
                       aliens.remove(i);
-//                      missil.setY(0);
                       pontos++;
-//                      TelasJogo.points.setText(Integer.toString(pontos));
-                      
-//                      System.out.println(pontos);
+
                       q++;
                       if(q==50){
                           cont=0;
@@ -178,19 +183,10 @@ public class SpaceShip extends Sprite {
                       }
                         if(aliens.isEmpty()){
                           cont=0;
-                      }
-//                      if(aliens.size() == 0){
-//                          cont=0;
-//                      }
-                 }
-            
-                
+                      }                  
+                 }  
               }
-//    
-//               
-        
-        }
-        
+        }       
     }
     
     public void keyReleased(KeyEvent e) {

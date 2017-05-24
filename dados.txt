@@ -1,12 +1,14 @@
-Digite o nome do seu personagem __________________ 3
-Digite o nome do seu personagem __________________ 0
-Digite o nome do seu personagem __________________ 2
-Digite o nome do seu personagem __________________ 2
+Eduardo __________________ 57
+Ana __________________ 1
 Digite o nome do seu personagem __________________ 0
 Digite o nome do seu personagem __________________ 0
-Digite o nome do seu personagem __________________ 0
-Digite o nome do seu personagem __________________ 0
+Digite o nome do seu personagem __________________ 23
 Digite o nome do seu personagem __________________ 2
-Digite o nome do seu personagem __________________ 2
-Digite o nome do seu personagem __________________ 2
-Digite o nome do seu personagem __________________ 6
+pedro __________________ 97
+pedro __________________ 1
+ana __________________ 2
+g __________________ 1
+m __________________ 11
+  __________________ 5
+  __________________ 11
+  __________________ 5

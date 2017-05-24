@@ -1,4 +1,6 @@
 import java.awt.EventQueue;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 
@@ -21,8 +23,6 @@ public class Application extends JFrame {
         
            Cadastro pessoa = new Cadastro();
            Application app = new Application();
-//           Application score = new Application();
-     
            Map mapa = new Map(app,pessoa);
            TelasJogo telas = new TelasJogo(pessoa,app);
            Audio inicial = new Audio();
@@ -34,6 +34,7 @@ public class Application extends JFrame {
             public void run() {
            
            inicial.tocar("audio/ufo.wav");
+         
            telas.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
            telas.setLocationRelativeTo(null);
            telas.setVisible(true);
