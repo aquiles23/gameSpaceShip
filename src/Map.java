@@ -106,12 +106,12 @@ int p=0,dif=3,l1=50,x=0,y;
                     y=  (int)(Math.random()*1);
                     spaceship.aliens.add(new Alien(x,y));
 
-                if(spaceship.q > 50 && spaceship.q < 100){
+                if(spaceship.q > 5 && spaceship.q < 100){
                      spaceship.aliens.get(i).loadImage("images/alien_MEDIUM.png");  
                      ImageIcon image2 = new ImageIcon("images/space3.jpg");
                     this.background = image2.getImage();   
                 }
-                if(spaceship.q >= 100){
+                if(spaceship.q >= 10){
                     spaceship.aliens.get(i).loadImage("images/alien_HARD.png");        
                     ImageIcon image2 = new ImageIcon("images/space2.jpg");
                     this.background = image2.getImage(); 
@@ -132,7 +132,7 @@ int p=0,dif=3,l1=50,x=0,y;
           drawGameOver(g);
           gravaArq();
        }
-       if(spaceship.pontos > 300){
+       if(spaceship.pontos > 5){
 
            dranMissionAccomplished(g);
            gravaArq();
