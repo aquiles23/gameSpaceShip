@@ -1,6 +1,5 @@
 
 import java.awt.Color;
-import java.awt.Event;
 import java.awt.Graphics;
 import java.awt.Font;
 import java.awt.FontMetrics;
@@ -28,7 +27,7 @@ public class Map extends JPanel implements ActionListener {
     protected static  Timer timer_map;
 
 
-    private final Image background;
+    private  Image background;
     private final SpaceShip spaceship;
     private JLabel pontos;
     private boolean status;
@@ -37,6 +36,7 @@ public class Map extends JPanel implements ActionListener {
     public boolean paused;
     public static  FileWriter arq;
     private int cont=0;
+    private ImageIcon image3,image4;
     
     public Map(Application app,Cadastro pessoa) {
         this.app = app;
@@ -52,8 +52,9 @@ public class Map extends JPanel implements ActionListener {
 
         timer_map = new Timer(Game.getDelay(), this);
         timer_map.start();
+      image3 = new ImageIcon("images/inva.jpg");
+      image4 = new ImageIcon("images/vit.jpg");
         
-
     }
     
 
@@ -102,14 +103,18 @@ int p=0,dif=3,l1=50,x=0,y;
                     p+=40;
                 }   
                     x = (int)(Math.random()*450);
-                    y=  (int)(Math.random()*20);
+                    y=  (int)(Math.random()*1);
                     spaceship.aliens.add(new Alien(x,y));
 
                 if(spaceship.q > 50 && spaceship.q < 100){
-                    spaceship.aliens.get(i).loadImage("images/alien_MEDIUM.png");                
+                     spaceship.aliens.get(i).loadImage("images/alien_MEDIUM.png");  
+                     ImageIcon image2 = new ImageIcon("images/space3.jpg");
+                    this.background = image2.getImage();   
                 }
                 if(spaceship.q >= 100){
-                    spaceship.aliens.get(i).loadImage("images/alien_HARD.png");                          
+                    spaceship.aliens.get(i).loadImage("images/alien_HARD.png");        
+                    ImageIcon image2 = new ImageIcon("images/space2.jpg");
+                    this.background = image2.getImage(); 
                 }
             }   
             spaceship.cont=1;
@@ -123,7 +128,7 @@ int p=0,dif=3,l1=50,x=0,y;
        }
        if(SpaceShip.vidas <= 0){
           this.status=false;
-
+          SpaceShip.vidas = 0;
           drawGameOver(g);
           gravaArq();
        }
@@ -133,11 +138,12 @@ int p=0,dif=3,l1=50,x=0,y;
            gravaArq();
        }
        pontuacao(g);
-       
+     
        for(int i=0;i<spaceship.aliens.size();i++ ){
            if(spaceship.aliens.get(i).getBounds().intersects(spaceship.getBounds())){
               spaceship.loadImage("images/explosion.png");
               SpaceShip.vidas = 0;
+              this.background = image3.getImage(); 
            }
        }
       
@@ -184,8 +190,9 @@ int p=0,dif=3,l1=50,x=0,y;
 
         repaint();
     }
-
+int contr=0;
     private void dranMissionAccomplished(Graphics g) {
+
         Audio vitoria = new Audio();
         vitoria.tocar("audio/vitoria.wav");
         String message = "Parabéns,voce salvou o seu planeta";
@@ -196,11 +203,18 @@ int p=0,dif=3,l1=50,x=0,y;
         g.setFont(font);
         g.drawString(message, (Game.getWidth() - metric.stringWidth(message)) / 2, Game.getHeight() / 2);
         
-        timer_map.stop();
+           if(contr>0){
+           contr=0; 
+           timer_map.stop();    
+        }else{
+           this.background = image4.getImage();
+           contr++;
+        }
        
     }
-      
+      int controle=0;
     private void drawGameOver(Graphics g) {
+               
         Audio loser = new Audio();
         loser.tocar("audio/derrota.wav");
         String message = "Game Over";
@@ -211,13 +225,16 @@ int p=0,dif=3,l1=50,x=0,y;
         g.drawString(message, (Game.getWidth() - metric.stringWidth(message)) / 2, Game.getHeight() / 2);
         
         msgDerrota(g);
-          
-        timer_map.stop();
-
-      
-
+        if(controle>0){
+           controle=0; 
+           timer_map.stop();    
+        }else{
+           this.background = image3.getImage();
+           controle++;
+        }
     }
     private void msgDerrota(Graphics g){
+             
          String message3 = "Seu planeta foi invadido.";
          Font font = new Font("Luminari", Font.BOLD, 22);
          FontMetrics metric = getFontMetrics(font);
@@ -256,9 +273,6 @@ int p=0,dif=3,l1=50,x=0,y;
         @Override
         public void keyReleased(KeyEvent e) {
             spaceship.keyReleased(e);
-        }
-
-        
+        }   
     }
-
 }
