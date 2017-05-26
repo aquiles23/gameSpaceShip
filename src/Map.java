@@ -52,8 +52,10 @@ public class Map extends JPanel implements ActionListener {
 
         timer_map = new Timer(Game.getDelay(), this);
         timer_map.start();
-      image3 = new ImageIcon("images/inva.jpg");
-      image4 = new ImageIcon("images/vit.jpg");
+        image3 = new ImageIcon("images/inva.jpg");
+        image4 = new ImageIcon("images/vit.jpg");
+        
+     
         
     }
     

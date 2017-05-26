@@ -9,7 +9,6 @@ import javax.swing.JOptionPane;
 public class Audio {
         private int controle;
         protected static int controlesoerrado;
-        private Application app;
         
         Audio(){
             this.controle=0;

@@ -1,7 +1,11 @@
+
 import java.awt.EventQueue;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 
 public class Application extends JFrame {
@@ -30,7 +34,7 @@ public class Application extends JFrame {
       EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-
+           
            inicial.tocar("audio/ufo.wav");
 
            telas.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -41,4 +45,5 @@ public class Application extends JFrame {
          
        
     }
+
 }

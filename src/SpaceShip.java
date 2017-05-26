@@ -16,7 +16,6 @@ public class SpaceShip extends Sprite {
     protected Audio tiro;
     protected  static  int vidas;
     protected  static int pontos;
-    protected Timer t = null;
     protected Application app;
     protected static boolean vivo;
     protected int aux,cont=0,q=0;
