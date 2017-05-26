@@ -147,8 +147,9 @@ public class SpaceShip extends Sprite {
         }
            if(key == KeyEvent.VK_SPACE){
               aux = 1;
-               
-               tiro.tocar("audio/tiro.wav");
+              if(TelasJogo.so == 1){ 
+                 tiro.tocar("audio/tiro.wav");
+              }
               missil.setX(x);
               if(missil.getY()<=0){
                   missil.setY(y);

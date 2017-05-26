@@ -5,11 +5,9 @@ import javax.swing.JFrame;
 
 
 public class Application extends JFrame {
-       
+          protected static int som;
     public Application() {
-        
-        //add(new Map());
-        
+        this.som = 1;
         setSize(Game.getWidth(), Game.getHeight());
 
         setTitle("Space Combat Game");
@@ -32,9 +30,9 @@ public class Application extends JFrame {
       EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-           
+
            inicial.tocar("audio/ufo.wav");
-         
+
            telas.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
            telas.setLocationRelativeTo(null);
            telas.setVisible(true);

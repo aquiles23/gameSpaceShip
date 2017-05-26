@@ -106,12 +106,12 @@ int p=0,dif=3,l1=50,x=0,y;
                     y=  (int)(Math.random()*1);
                     spaceship.aliens.add(new Alien(x,y));
 
-                if(spaceship.q > 5 && spaceship.q < 100){
+                if(spaceship.q > 50 && spaceship.q < 100){
                      spaceship.aliens.get(i).loadImage("images/alien_MEDIUM.png");  
                      ImageIcon image2 = new ImageIcon("images/space3.jpg");
                     this.background = image2.getImage();   
                 }
-                if(spaceship.q >= 10){
+                if(spaceship.q >= 100){
                     spaceship.aliens.get(i).loadImage("images/alien_HARD.png");        
                     ImageIcon image2 = new ImageIcon("images/space2.jpg");
                     this.background = image2.getImage(); 
@@ -132,7 +132,7 @@ int p=0,dif=3,l1=50,x=0,y;
           drawGameOver(g);
           gravaArq();
        }
-       if(spaceship.pontos > 5){
+       if(spaceship.pontos > 300){
 
            dranMissionAccomplished(g);
            gravaArq();
@@ -172,7 +172,7 @@ int p=0,dif=3,l1=50,x=0,y;
           try {
            arq = new FileWriter("dados.txt",true);
         } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null,"Erro","Não foi encontrado o arquivos contendo os dados!",JOptionPane.PLAIN_MESSAGE);
+            JOptionPane.showMessageDialog(null,"Não foi encontrado o arquivos contendo os dados!","Erro",JOptionPane.PLAIN_MESSAGE);
         }
           PrintWriter gravar = new PrintWriter(arq);
           gravar.println(TelasJogo.pessoa.getApelido()+" __________________ "+SpaceShip.pontos);
@@ -194,7 +194,9 @@ int contr=0;
     private void dranMissionAccomplished(Graphics g) {
 
         Audio vitoria = new Audio();
-        vitoria.tocar("audio/vitoria.wav");
+        if(TelasJogo.so == 1){
+            vitoria.tocar("audio/vitoria.wav");
+        }    
         String message = "Parabéns,voce salvou o seu planeta";
         Font font = new Font("Helvetica", Font.BOLD, 28);
         FontMetrics metric = getFontMetrics(font);
@@ -216,7 +218,10 @@ int contr=0;
     private void drawGameOver(Graphics g) {
                
         Audio loser = new Audio();
-        loser.tocar("audio/derrota.wav");
+        if(TelasJogo.so == 1){
+            Audio.controlesoerrado = 1;
+            loser.tocar("audio/derrota.wav");
+        }
         String message = "Game Over";
         Font font = new Font("Helvetica", Font.BOLD, 32);
         FontMetrics metric = getFontMetrics(font);
