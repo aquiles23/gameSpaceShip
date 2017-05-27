@@ -540,7 +540,7 @@ public class TelasJogo extends javax.swing.JFrame {
         try {
             arq = new FileReader("dados.txt");
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(TelasJogo.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Erro ao abrir arquivo.Um novo arquivo de registro será criado!","Erro",JOptionPane.PLAIN_MESSAGE);
         }
         BufferedReader lerArq = new BufferedReader(arq);
 

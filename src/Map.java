@@ -75,7 +75,7 @@ public class Map extends JPanel implements ActionListener {
         Toolkit.getDefaultToolkit().sync();
 
     }
-int p=0,dif=3,l1=50,x=0,y;
+int p=0,dif=3,l1=50,x=0,y,contr=0,controle=0;
     private void draw(Graphics g) throws InterruptedException {
 
        g.drawImage(spaceship.getImage(), spaceship.getX(), spaceship.getY(), this);
@@ -128,16 +128,20 @@ int p=0,dif=3,l1=50,x=0,y;
           dif = dif;
         }
        }
-       if(SpaceShip.vidas <= 0){
+       if(SpaceShip.vidas <= 0 ){
           this.status=false;
           SpaceShip.vidas = 0;
           drawGameOver(g);
-          gravaArq();
+          if(controle <= 0){
+            gravaArq();
+          }
        }
-       if(spaceship.pontos > 300){
-
+       if(spaceship.pontos > 300 && SpaceShip.vidas > 0){
+           if(contr <= 0){
+                 gravaArq();
+           }
            dranMissionAccomplished(g);
-           gravaArq();
+           
        }
        pontuacao(g);
      
@@ -181,7 +185,7 @@ int p=0,dif=3,l1=50,x=0,y;
              try {
             arq.close();
         } catch (IOException ex) {
-            Logger.getLogger(TelasJogo.class.getName()).log(Level.SEVERE, null, ex);
+            
         }
     }
 
@@ -192,7 +196,7 @@ int p=0,dif=3,l1=50,x=0,y;
 
         repaint();
     }
-int contr=0;
+
     private void dranMissionAccomplished(Graphics g) {
 
         Audio vitoria = new Audio();
@@ -216,7 +220,7 @@ int contr=0;
         }
        
     }
-      int controle=0;
+   
     private void drawGameOver(Graphics g) {
                
         Audio loser = new Audio();
