@@ -153,7 +153,7 @@ int p=0,dif=3,l1=50,x=0,y,contr=0,controle=0;
            }
        }
       
-       if(SpaceShip.pausado == true){
+       if((SpaceShip.pausado == true)){
            pausa(g);
        }
 }

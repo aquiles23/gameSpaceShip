@@ -135,7 +135,7 @@ public class SpaceShip extends Sprite {
         if (key == KeyEvent.VK_DOWN) {
             speed_y = MAX_SPEED_Y;
         }
-        if(key == KeyEvent.VK_P){
+        if(key == KeyEvent.VK_P && SpaceShip.vidas > 0){
             if(pausado == false){
                 Map.timer_map.stop();
                 this.pausado = true;
