@@ -130,7 +130,6 @@ public class SpaceShip extends Sprite {
             speed_y = -1 * MAX_SPEED_Y;
             thrust();
         }
-        
         // Set speed to move to down
         if (key == KeyEvent.VK_DOWN) {
             speed_y = MAX_SPEED_Y;
