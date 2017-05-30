@@ -94,6 +94,12 @@ public class TelasJogo extends javax.swing.JFrame {
         voltar = new javax.swing.JLabel();
         linux = new javax.swing.JRadioButton();
         macos = new javax.swing.JRadioButton();
+        nv1 = new javax.swing.JRadioButton();
+        nv2 = new javax.swing.JRadioButton();
+        nave1 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
         tela4 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -154,15 +160,6 @@ public class TelasJogo extends javax.swing.JFrame {
         tela1.setLayout(tela1Layout);
         tela1Layout.setHorizontalGroup(
             tela1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tela1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(tela1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tela1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(40, 40, 40))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tela1Layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addGap(337, 337, 337))))
             .addGroup(tela1Layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -176,18 +173,27 @@ public class TelasJogo extends javax.swing.JFrame {
                     .addComponent(tut, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(59, 59, 59))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tela1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(tela1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tela1Layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addGap(337, 337, 337))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tela1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(32, 32, 32))))
         );
         tela1Layout.setVerticalGroup(
             tela1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tela1Layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
+                .addGap(35, 35, 35)
                 .addComponent(jLabel2)
-                .addGap(47, 47, 47)
+                .addGap(43, 43, 43)
                 .addGroup(tela1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tut, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addGroup(tela1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -256,7 +262,7 @@ public class TelasJogo extends javax.swing.JFrame {
             }
         });
 
-        linux.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        linux.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         linux.setForeground(new java.awt.Color(255, 255, 255));
         linux.setText("Linux");
         linux.addActionListener(new java.awt.event.ActionListener() {
@@ -265,7 +271,7 @@ public class TelasJogo extends javax.swing.JFrame {
             }
         });
 
-        macos.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        macos.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         macos.setForeground(new java.awt.Color(255, 255, 255));
         macos.setText("Mac Os");
         macos.addActionListener(new java.awt.event.ActionListener() {
@@ -274,10 +280,64 @@ public class TelasJogo extends javax.swing.JFrame {
             }
         });
 
+        nv1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nv1ActionPerformed(evt);
+            }
+        });
+
+        nv2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nv2ActionPerformed(evt);
+            }
+        });
+
+        nave1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/spaceship2.gif"))); // NOI18N
+
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/spaceship.png"))); // NOI18N
+
+        jLabel13.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setText("Nave");
+
+        jLabel14.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setText("Sistema");
+
         javax.swing.GroupLayout tela3Layout = new javax.swing.GroupLayout(tela3);
         tela3.setLayout(tela3Layout);
         tela3Layout.setHorizontalGroup(
             tela3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tela3Layout.createSequentialGroup()
+                .addGap(43, 43, 43)
+                .addComponent(voltar)
+                .addGap(18, 18, 18)
+                .addGroup(tela3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(tela3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, tela3Layout.createSequentialGroup()
+                            .addComponent(nv2)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLabel12)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                        .addGroup(tela3Layout.createSequentialGroup()
+                            .addComponent(nv1)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(nave1)
+                            .addGap(49, 49, 49)))
+                    .addGroup(tela3Layout.createSequentialGroup()
+                        .addComponent(jLabel13)
+                        .addGap(9, 9, 9)))
+                .addGroup(tela3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(macos)
+                    .addComponent(linux)
+                    .addComponent(jLabel14))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tela3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btsalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(59, 59, 59)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(66, 66, 66))
             .addGroup(tela3Layout.createSequentialGroup()
                 .addGroup(tela3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(tela3Layout.createSequentialGroup()
@@ -293,24 +353,9 @@ public class TelasJogo extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(jScrollPane2))))
                     .addGroup(tela3Layout.createSequentialGroup()
-                        .addGap(66, 66, 66)
-                        .addComponent(btsalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(61, 61, 61)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(62, 62, 62)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tela3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(tela3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tela3Layout.createSequentialGroup()
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(19, 19, 19))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tela3Layout.createSequentialGroup()
-                        .addComponent(voltar)
-                        .addGap(36, 36, 36)
-                        .addGroup(tela3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(macos)
-                            .addComponent(linux))
-                        .addGap(65, 65, 65))))
         );
         tela3Layout.setVerticalGroup(
             tela3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -326,17 +371,28 @@ public class TelasJogo extends javax.swing.JFrame {
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(tela3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(tela3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btsalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(tela3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(voltar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(tela3Layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(macos)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(linux)))
+                        .addGroup(tela3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel14)
+                            .addComponent(jLabel13))
+                        .addGap(18, 18, 18)
+                        .addGroup(tela3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nv1)
+                            .addComponent(nave1)
+                            .addComponent(macos))
+                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addGroup(tela3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(linux)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nv2)))
+                    .addGroup(tela3Layout.createSequentialGroup()
+                        .addGap(11, 11, 11)
+                        .addComponent(voltar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -446,7 +502,7 @@ public class TelasJogo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-//           
+        nave1.setVisible(true);
         tela1.setVisible(false);
         tela2.setVisible(false);
         tela3.setVisible(true);
@@ -502,7 +558,7 @@ public class TelasJogo extends javax.swing.JFrame {
         lbpontos.setText("Vidas: ");
         lblvidas.setText("Pontos: ");
 
-        if (pessoa.getSalvo() && TelasJogo.so != 0) {
+        if (pessoa.getSalvo() && TelasJogo.so != 0 && SpaceShip.nave !=0 ) {
             if(so == 1){
                 play.tocar("audio/play.wav");
             }
@@ -513,7 +569,7 @@ public class TelasJogo extends javax.swing.JFrame {
 
             app.setVisible(true);
         } else {
-            JOptionPane.showConfirmDialog(null, "É necessário salvar os dados antes de iniciar o jogo e selecionar o Sistema operacional!", "Alerta", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showConfirmDialog(null, "É necessário salvar os dados antes de iniciar o jogo, selecionar o Sistema operacional e escolher uma nave!", "Alerta", JOptionPane.WARNING_MESSAGE);
         }
         
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -572,6 +628,7 @@ public class TelasJogo extends javax.swing.JFrame {
     private void voltarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_voltarMouseClicked
         tela2.setVisible(false);
         tela1.setVisible(true);
+       nave1.setVisible(false);
     }//GEN-LAST:event_voltarMouseClicked
 
     private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
@@ -595,6 +652,18 @@ public class TelasJogo extends javax.swing.JFrame {
        so = 2;
     }//GEN-LAST:event_linuxActionPerformed
 
+    private void nv1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nv1ActionPerformed
+        SpaceShip.nave = 1;
+        nv1.setSelected(true);
+        nv2.setSelected(false);
+    }//GEN-LAST:event_nv1ActionPerformed
+
+    private void nv2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nv2ActionPerformed
+        SpaceShip.nave = 2;
+        nv1.setSelected(false);
+        nv2.setSelected(true);
+    }//GEN-LAST:event_nv2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btsalvar;
@@ -606,6 +675,9 @@ public class TelasJogo extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -621,6 +693,9 @@ public class TelasJogo extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JRadioButton linux;
     private javax.swing.JRadioButton macos;
+    private javax.swing.JLabel nave1;
+    private javax.swing.JRadioButton nv1;
+    private javax.swing.JRadioButton nv2;
     private javax.swing.JTextPane rank;
     private javax.swing.JPanel tela1;
     private javax.swing.JPanel tela2;

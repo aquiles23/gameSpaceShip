@@ -5,7 +5,7 @@ import javax.swing.Timer;
 
 public class SpaceShip extends Sprite {
     
-    private static final int MAX_SPEED_X = 2;
+    private static final int MAX_SPEED_X = 3;
     private static final int MAX_SPEED_Y = 1;
     
     private int speed_x;
@@ -19,6 +19,7 @@ public class SpaceShip extends Sprite {
     protected Application app;
     protected static boolean vivo;
     protected int aux,cont=0,q=0;
+    protected static int nave;
 
     
     
@@ -26,6 +27,7 @@ public class SpaceShip extends Sprite {
         super(x, y);
         this.vivo = true;
         this.vidas = 5;
+        this.nave = 0;
         this.app = app;
         this.aliens = new ArrayList();
         this.aux=0;
@@ -85,11 +87,24 @@ public class SpaceShip extends Sprite {
     }
     
     private void noThrust(){
-        loadImage("images/spaceship.png"); 
+        
+        loadImage("images/go1.png");
+     
+     
+        if(nave == 1 ){
+         loadImage("images/spaceship21.png"); 
+        }else if(nave == 2){
+         loadImage("images/spaceship.png");   
+        }
     }
     
     private void thrust(){
-        loadImage("images/spaceship_thrust.png"); 
+        
+        if(nave == 1){
+           loadImage("images/spaceship2.png"); 
+        }else if(nave==2){
+           loadImage("images/spaceship_thrust.png"); 
+        }
     }    
 
     public void move() {
