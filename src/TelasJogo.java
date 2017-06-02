@@ -30,7 +30,7 @@ public class TelasJogo extends javax.swing.JFrame {
         initComponents();
         setResizable(false);
         this.aberto = true;
-
+        instrucoes.setEnabled(false);
         tela1.setVisible(true);
         tela2.setVisible(false);
         tela3.setVisible(false);
@@ -107,7 +107,7 @@ public class TelasJogo extends javax.swing.JFrame {
         rank = new javax.swing.JTextPane();
         tela2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        instrucoes = new javax.swing.JTextArea();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
 
@@ -374,7 +374,6 @@ public class TelasJogo extends javax.swing.JFrame {
                 .addGroup(tela3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btsalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
                 .addGroup(tela3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(tela3Layout.createSequentialGroup()
                         .addGroup(tela3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -448,13 +447,11 @@ public class TelasJogo extends javax.swing.JFrame {
 
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        jTextArea1.setBackground(new java.awt.Color(0, 153, 153));
-        jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Apple Chancery", 0, 24)); // NOI18N
-        jTextArea1.setForeground(new java.awt.Color(255, 255, 255));
-        jTextArea1.setRows(5);
-        jTextArea1.setText("Destrua todos os alienígenas que\nestão invadindo seu planeta.\nTome cuidado, a medida que você\nos mata,eles vão ficando mais\n furiosos.\n\nBoa sorte!\n");
-        jScrollPane1.setViewportView(jTextArea1);
+        instrucoes.setColumns(20);
+        instrucoes.setFont(new java.awt.Font("Apple Chancery", 0, 24)); // NOI18N
+        instrucoes.setRows(5);
+        instrucoes.setText("Destrua todos os alienígenas que\nestão invadindo seu planeta.\nTome cuidado, a medida que você\nos mata,eles vão ficando mais\n furiosos.\n\nBoa sorte!\n");
+        jScrollPane1.setViewportView(instrucoes);
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/v.png"))); // NOI18N
         jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -477,23 +474,23 @@ public class TelasJogo extends javax.swing.JFrame {
                         .addGap(170, 170, 170)
                         .addComponent(jLabel3))
                     .addGroup(tela2Layout.createSequentialGroup()
-                        .addGap(78, 78, 78)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(tela2Layout.createSequentialGroup()
                         .addGap(161, 161, 161)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tela2Layout.createSequentialGroup()
+                .addGap(0, 68, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(67, 67, 67))
         );
         tela2Layout.setVerticalGroup(
             tela2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tela2Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addContainerGap(16, Short.MAX_VALUE)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         getContentPane().add(tela2, "card5");
@@ -592,6 +589,7 @@ public class TelasJogo extends javax.swing.JFrame {
         tela3.setVisible(false);
         tela1.setVisible(false);
 
+        rank.setEnabled(false);
         FileReader arq = null;
         try {
             arq = new FileReader("dados.txt");
@@ -669,6 +667,7 @@ public class TelasJogo extends javax.swing.JFrame {
     private javax.swing.JButton btsalvar;
     private javax.swing.JTextArea gtfrase;
     private javax.swing.JTextField gtnome;
+    private javax.swing.JTextArea instrucoes;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -690,7 +689,6 @@ public class TelasJogo extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JRadioButton linux;
     private javax.swing.JRadioButton macos;
     private javax.swing.JLabel nave1;

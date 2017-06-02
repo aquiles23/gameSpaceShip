@@ -1,12 +1,11 @@
 
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-import javax.swing.Timer;
 
 public class SpaceShip extends Sprite {
     
     private static final int MAX_SPEED_X = 3;
-    private static final int MAX_SPEED_Y = 1;
+    private static final int MAX_SPEED_Y = 2;
     
     private int speed_x;
     private int speed_y;
@@ -126,8 +125,10 @@ public class SpaceShip extends Sprite {
         y += speed_y;
         
     }
+    int controle = 0;
+    
     public void keyPressed(KeyEvent e) throws InterruptedException {
-
+    
         int key = e.getKeyCode();
         
         // Set speed to move to the left
@@ -167,40 +168,12 @@ public class SpaceShip extends Sprite {
               if(missil.getY()<=0){
                   missil.setY(y);
               }
-
-              for(int i=0;i<aliens.size();i++){
-             
-              if(((aliens.get(i).getX() == missil.getX()-2) || (aliens.get(i).getX() == missil.getX()-1) || (aliens.get(i).getX() == missil.getX()) || (aliens.get(i).getX()+1 == missil.getX()) || (aliens.get(i).getX() == missil.getX()+2)
-                      || (aliens.get(i).getX()+3 == missil.getX()) || (aliens.get(i).getX()+4 == missil.getX()) || (aliens.get(i).getX()+5 == missil.getX())
-                      || (aliens.get(i).getX()+6 == missil.getX()) || (aliens.get(i).getX()+7 == missil.getX()) || (aliens.get(i).getX()+8 == missil.getX())
-                      || (aliens.get(i).getX()+9 == missil.getX()) || (aliens.get(i).getX()+10 == missil.getX())|| (aliens.get(i).getX()+11 == missil.getX())
-                      || (aliens.get(i).getX()+12 == missil.getX()) || (aliens.get(i).getX()+13 == missil.getX()) || (aliens.get(i).getX()+14 == missil.getX())
-                      ||(aliens.get(i).getX()+15 == missil.getX()) || (aliens.get(i).getX()+16 == missil.getX()) || (aliens.get(i).getX()+17 == missil.getX())
-                      || (aliens.get(i).getX()+18 == missil.getX()) || (aliens.get(i).getX()+19 == missil.getX()) || (aliens.get(i).getX()+20 == missil.getX())) && (aliens.get(i).getY() < missil.getY())){
-                    
-                    aliens.get(i).loadImage("images/explosion.png");
-                      aliens.remove(i);
-                      pontos++;
-
-                      q++;
-                      if(q==50){
-                          cont=0;
-                      }
-                      if(q==100){
-                          cont=0;
-                      }
-                      if(q==150){
-                          cont=0;   
-                      }
-                        if(q==200){
-                          cont=0;   
-                      }
-                        if(aliens.isEmpty()){
-                          cont=0;
-                      }                  
-                 }  
-              }
-        }       
+              colisaoMissilAlien();
+        }
+        if(controle == 0){
+          noThrust();
+          controle++;
+        }
     }
     
     public void keyReleased(KeyEvent e) {
@@ -214,6 +187,21 @@ public class SpaceShip extends Sprite {
         if (key == KeyEvent.VK_UP || key == KeyEvent.VK_DOWN) {
             speed_y = 0;
             noThrust();
+        }
+    }
+    private void colisaoMissilAlien(){
+        
+        for(int i=0;i<aliens.size();i++){
+            if(((aliens.get(i).getX() == missil.getX()-20) ||(aliens.get(i).getX() == missil.getX()-19) ||(aliens.get(i).getX() == missil.getX()-18) ||(aliens.get(i).getX() == missil.getX()-17) ||(aliens.get(i).getX() == missil.getX()-16) ||(aliens.get(i).getX() == missil.getX()-15) ||(aliens.get(i).getX() == missil.getX()-14) ||(aliens.get(i).getX() == missil.getX()-13) ||(aliens.get(i).getX() == missil.getX()-12) ||(aliens.get(i).getX() == missil.getX()-11) ||(aliens.get(i).getX() == missil.getX()-10) ||(aliens.get(i).getX() == missil.getX()-9) ||(aliens.get(i).getX() == missil.getX()-8) ||(aliens.get(i).getX() == missil.getX()-7) ||(aliens.get(i).getX() == missil.getX()-6) ||(aliens.get(i).getX() == missil.getX()-3)||(aliens.get(i).getX() == missil.getX()-4) ||(aliens.get(i).getX() == missil.getX()-5) || (aliens.get(i).getX() == missil.getX()-2) || (aliens.get(i).getX() == missil.getX()-1) || (aliens.get(i).getX() == missil.getX()) || (aliens.get(i).getX()+1 == missil.getX()) || (aliens.get(i).getX() == missil.getX()+2) || (aliens.get(i).getX()+3 == missil.getX()) || (aliens.get(i).getX()+4 == missil.getX()) || (aliens.get(i).getX()+5 == missil.getX())|| (aliens.get(i).getX()+6 == missil.getX()) || (aliens.get(i).getX()+7 == missil.getX()) || (aliens.get(i).getX()+8 == missil.getX())|| (aliens.get(i).getX()+9 == missil.getX()) || (aliens.get(i).getX()+10 == missil.getX())|| (aliens.get(i).getX()+11 == missil.getX())
+                 || (aliens.get(i).getX()+12 == missil.getX()) || (aliens.get(i).getX()+13 == missil.getX()) || (aliens.get(i).getX()+14 == missil.getX())||(aliens.get(i).getX()+15 == missil.getX()) || (aliens.get(i).getX()+16 == missil.getX()) || (aliens.get(i).getX()+17 == missil.getX())|| (aliens.get(i).getX()+18 == missil.getX()) || (aliens.get(i).getX()+19 == missil.getX()) || (aliens.get(i).getX()+20 == missil.getX())) && (aliens.get(i).getY() < missil.getY())){
+                aliens.get(i).loadImage("images/explosion.png");
+                aliens.remove(i);
+                pontos++;
+                q++;
+                    if((q==50) || (q==100) || (q==150) || (q==200) || (aliens.isEmpty())){
+                         cont=0;
+                    }               
+                 }  
         }
     }
 }

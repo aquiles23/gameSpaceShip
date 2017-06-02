@@ -73,59 +73,68 @@ public class Map extends JPanel implements ActionListener {
 
     }
 int p=0,dif=3,l1=50,x=0,y,contr=0,controle=0;
-    private void draw(Graphics g) throws InterruptedException {
-
+private void draw(Graphics g) throws InterruptedException {
        g.drawImage(spaceship.getImage(), spaceship.getX(), spaceship.getY(), this);
-         for(int i=0;i<spaceship.aliens.size();i++){
+        for(int i=0;i<spaceship.aliens.size();i++){
             g.drawImage(spaceship.aliens.get(i).getImage(), spaceship.aliens.get(i).getX(), spaceship.aliens.get(i).getY(), this);
                spaceship.aliens.get(i).posicionar();
-         }
-       if(spaceship.aux == 1){
+        }
+        if(spaceship.aux == 1){
             g.drawImage(spaceship.missil.getImage(), spaceship.getX(), spaceship.missil.getY(), this);
                 for(int i=0;i<spaceship.aliens.size();i++){
                     g.drawImage(spaceship.aliens.get(i).getImage(), spaceship.aliens.get(i).getX(), spaceship.aliens.get(i).getY(), this);
                 }
-                  spaceship.missil.setX(spaceship.missil.getX());
-                  spaceship.missil.setY(spaceship.missil.getY()-80);
-         
-         }
+            spaceship.missil.setX(spaceship.missil.getX());
+            spaceship.missil.setY(spaceship.missil.getY()-80);
+        }
         for(int i=0;i<spaceship.aliens.size();i++){
             if(spaceship.aliens.get(i).getY() == 499){
                 spaceship.vidas--;
             }
-         }
-       if(spaceship.cont==0){
-            for(int i=0;i<dif;i++){   
-                if(p>=400){
-                    p=0;
-                }else{
-                    p+=40;
-                }   
-                    x = (int)(Math.random()*450);
-                    y=  (int)(Math.random()*1);
-                    spaceship.aliens.add(new Alien(x,y));
-
+        }
+       dificuldade(); 
+       statusDoJogo(g);
+       pontuacao(g);
+       explosaoColisao();
+   
+       if((SpaceShip.pausado == true)){
+           pausa(g);
+       }
+}
+    public void dificuldade(){
+        if(spaceship.cont==0){
+          for(int i=0;i<dif;i++){   
+            if(p>=400){
+                p=0;
+            }else{
+                p+=40;
+            }   
+              x = (int)(Math.random()*450);
+              y=  (int)(Math.random()*1);
+              spaceship.aliens.add(new Alien(x,y));
+              
                 if(spaceship.q > 50 && spaceship.q < 100){
-                     spaceship.aliens.get(i).loadImage("images/alien_MEDIUM.png");  
-                     ImageIcon image2 = new ImageIcon("images/space3.jpg");
-                    this.background = image2.getImage();   
+                  spaceship.aliens.get(i).loadImage("images/alien_MEDIUM.png");  
+                  ImageIcon image2 = new ImageIcon("images/space3.jpg");
+                  this.background = image2.getImage();   
                 }
                 if(spaceship.q >= 100){
                     spaceship.aliens.get(i).loadImage("images/alien_HARD.png");        
                     ImageIcon image2 = new ImageIcon("images/space2.jpg");
                     this.background = image2.getImage(); 
                 }
-            }   
+          }   
             spaceship.cont=1;
-            
-        if(spaceship.q >= l1){
-            dif=dif+1;
-            l1+=l1+10;                
-        }else{
-          dif = dif;
-        }
+            if(spaceship.q >= l1){
+                dif=dif+1;
+                l1+=l1+10;                
+            }else{
+                dif = dif;
+            }
        }
-       if(SpaceShip.vidas <= 0 ){
+    }
+    public void statusDoJogo(Graphics g){
+          if(SpaceShip.vidas <= 0 ){
           this.status=false;
           SpaceShip.vidas = 0;
           drawGameOver(g);
@@ -137,24 +146,19 @@ int p=0,dif=3,l1=50,x=0,y,contr=0,controle=0;
            if(contr <= 0){
                  gravaArq();
            }
-           dranMissionAccomplished(g);
-           
+           dranMissionAccomplished(g);   
        }
-       pontuacao(g);
-     
-       for(int i=0;i<spaceship.aliens.size();i++ ){
+    }
+   public void explosaoColisao(){
+        for(int i=0;i<spaceship.aliens.size();i++ ){
            if(spaceship.aliens.get(i).getBounds().intersects(spaceship.getBounds())){
               spaceship.loadImage("images/explosion.png");
               SpaceShip.vidas = 0;
               this.background = image3.getImage(); 
            }
        }
-      
-       if((SpaceShip.pausado == true)){
-           pausa(g);
-       }
-}
-    void pontuacao(Graphics g){
+    }
+    public void pontuacao(Graphics g){
         String auxLife = Integer.toString(SpaceShip.vidas);
         String auxPontos = Integer.toString(SpaceShip.pontos);
         
@@ -171,7 +175,7 @@ int p=0,dif=3,l1=50,x=0,y,contr=0,controle=0;
         g.drawString(message3, (metric.stringWidth(message))+360, Game.getHeight()-480);   
     }
      
-    void gravaArq(){
+   public void gravaArq(){
           try {
            arq = new FileWriter("dados.txt",true);
         } catch (IOException ex) {

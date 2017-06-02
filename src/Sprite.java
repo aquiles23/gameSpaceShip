@@ -1,5 +1,3 @@
-
-
 import java.awt.Rectangle;
 import java.awt.Image;
 import javax.swing.ImageIcon;

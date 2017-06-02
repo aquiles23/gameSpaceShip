@@ -1,17 +1,12 @@
 
 import java.awt.EventQueue;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
 
 public class Application extends JFrame {
           protected static int som;
     public Application() {
-        this.som = 1;
+        Application.som = 1;
         setSize(Game.getWidth(), Game.getHeight());
 
         setTitle("Space Combat Game");
