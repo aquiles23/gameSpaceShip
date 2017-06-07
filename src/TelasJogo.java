@@ -4,8 +4,12 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static javafx.scene.input.KeyCode.T;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -140,7 +144,6 @@ public class TelasJogo extends javax.swing.JFrame {
 
         jLabel8.setFont(new java.awt.Font("Luminari", 0, 12)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Criado por Eduardo Junio");
 
         jButton3.setText("Sair");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -193,7 +196,7 @@ public class TelasJogo extends javax.swing.JFrame {
                 .addGroup(tela1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tut, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
                 .addGroup(tela1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -584,6 +587,7 @@ public class TelasJogo extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+       
         tela4.setVisible(true);
         tela2.setVisible(false);
         tela3.setVisible(false);
@@ -604,22 +608,21 @@ public class TelasJogo extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(TelasJogo.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        while (linha != null) {
-
-            rank.setText(rank.getText() + linha + "\n");
-            try {
-                linha = lerArq.readLine();
-            } catch (IOException ex) {
-                Logger.getLogger(TelasJogo.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           OrdenaRanking ordena = new OrdenaRanking(); 
+        try {
+            ordena.ordenar();
+        } catch (IOException ex) {
+            System.out.println("Não ordenado!");
         }
-
+        
         try {
             arq.close();
         } catch (IOException ex) {
             Logger.getLogger(TelasJogo.class.getName()).log(Level.SEVERE, null, ex);
         }
+                    
+
+        
 
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -694,7 +697,7 @@ public class TelasJogo extends javax.swing.JFrame {
     private javax.swing.JLabel nave1;
     private javax.swing.JRadioButton nv1;
     private javax.swing.JRadioButton nv2;
-    private javax.swing.JTextPane rank;
+    protected static javax.swing.JTextPane rank;
     private javax.swing.JPanel tela1;
     private javax.swing.JPanel tela2;
     private javax.swing.JPanel tela3;

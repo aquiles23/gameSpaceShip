@@ -182,7 +182,7 @@ private void draw(Graphics g) throws InterruptedException {
             JOptionPane.showMessageDialog(null,"Não foi encontrado o arquivos contendo os dados!","Erro",JOptionPane.PLAIN_MESSAGE);
         }
           PrintWriter gravar = new PrintWriter(arq);
-          gravar.println(TelasJogo.pessoa.getApelido()+" __________________ "+SpaceShip.pontos);
+          gravar.println(TelasJogo.pessoa.getApelido()+"-"+SpaceShip.pontos);
              try {
             arq.close();
         } catch (IOException ex) {
