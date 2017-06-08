@@ -22,19 +22,18 @@ public class Application extends JFrame {
            Application app = new Application();
            Map mapa = new Map(app,pessoa);
            TelasJogo telas = new TelasJogo(pessoa,app);
-           Audio inicial = new Audio();
+          
            app.add(mapa);
-   
+           telas.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+           telas.setLocationRelativeTo(null);
+           telas.setVisible(true);
           
       EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-           
+           Audio inicial = new Audio();
            inicial.tocar("audio/ufo.wav");
-
-           telas.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-           telas.setLocationRelativeTo(null);
-           telas.setVisible(true);
+        
           }
         });
          

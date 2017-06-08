@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-public class Map extends JPanel implements ActionListener {
+public class Map extends JPanel implements ActionListener{
 
     private final int SPACESHIP_X = 220;
     private final int SPACESHIP_Y = 430;

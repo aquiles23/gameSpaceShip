@@ -32,12 +32,7 @@ public class Audio {
                 Application.som = -1;
                 controle++;
             }
-                
-//            }else if(!System.getProperty("os.name").equalsIgnoreCase(so)){
-//                Map.timer_map.stop();
-//                JOptionPane.showMessageDialog(null,"Foi detectado que você selecionou o sistema errado ou que a pasta contendo os efeitos do jogo está ausente,o jogo será encerrado!","Alerta",JOptionPane.PLAIN_MESSAGE);
-//                System.exit(0);
-//            }
+
         }
     }
 
