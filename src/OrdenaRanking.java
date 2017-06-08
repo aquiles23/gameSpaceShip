@@ -40,7 +40,7 @@ public class OrdenaRanking {
             a++;
          }       
        for(int i=lista.size()-1;i>=0;i--){
-           TelasJogo.rank.setText(TelasJogo.rank.getText() + listaFinal.get(i) + "\n");  
+           TelasJogo.r.setText(TelasJogo.r.getText() + listaFinal.get(i) + "\n");  
        }
     
     }

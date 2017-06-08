@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextPane;
 
 public class TelasJogo extends javax.swing.JFrame {
 
@@ -19,6 +20,7 @@ public class TelasJogo extends javax.swing.JFrame {
     private boolean aberto;
     public static JPanel painel;
     public static boolean jogoAberto = false;
+    protected static JTextPane r;
 
     public TelasJogo(Cadastro pessoa, Application app) {
         this.so = 0;
@@ -30,6 +32,7 @@ public class TelasJogo extends javax.swing.JFrame {
         initComponents();
         setResizable(false);
         this.aberto = true;
+        r = this.rank;
         instrucoes.setEnabled(false);
         tela1.setVisible(true);
         tela2.setVisible(false);
@@ -261,6 +264,7 @@ public class TelasJogo extends javax.swing.JFrame {
             }
         });
 
+        linux.setBackground(new java.awt.Color(0, 153, 153));
         linux.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         linux.setForeground(new java.awt.Color(255, 255, 255));
         linux.setText("Linux");
@@ -270,6 +274,7 @@ public class TelasJogo extends javax.swing.JFrame {
             }
         });
 
+        macos.setBackground(new java.awt.Color(0, 153, 153));
         macos.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         macos.setForeground(new java.awt.Color(255, 255, 255));
         macos.setText("Mac Os");
@@ -279,12 +284,14 @@ public class TelasJogo extends javax.swing.JFrame {
             }
         });
 
+        nv1.setBackground(new java.awt.Color(0, 153, 153));
         nv1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nv1ActionPerformed(evt);
             }
         });
 
+        nv2.setBackground(new java.awt.Color(0, 153, 153));
         nv2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nv2ActionPerformed(evt);
@@ -706,7 +713,7 @@ public class TelasJogo extends javax.swing.JFrame {
     private javax.swing.JLabel nave1;
     private javax.swing.JRadioButton nv1;
     private javax.swing.JRadioButton nv2;
-    public static javax.swing.JTextPane rank;
+    private javax.swing.JTextPane rank;
     private javax.swing.JPanel tela1;
     private javax.swing.JPanel tela2;
     private javax.swing.JPanel tela3;
