@@ -548,6 +548,17 @@ public class TelasJogo extends javax.swing.JFrame {
     }//GEN-LAST:event_btsalvarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       String sistema = null;
+         if(so == 1){
+            sistema = "Mac Os X";          
+        }else if(so == 2){
+            sistema = "Linux";
+        }
+         if(!System.getProperty("os.name").equalsIgnoreCase(sistema) && this.so != 0){
+                Map.timer_map.stop();
+                JOptionPane.showMessageDialog(null,"Foi detectado que você selecionou o sistema errado ou que a pasta contendo os efeitos do jogo está ausente,o jogo será encerrado!","Alerta",JOptionPane.PLAIN_MESSAGE);
+                System.exit(0);
+         }
         Audio play = new Audio();
         JLabel lbpontos = new JLabel();
         JLabel lblvidas = new JLabel();
