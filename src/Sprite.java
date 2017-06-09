@@ -17,6 +17,11 @@ public abstract class Sprite {
         this.y = y;
         visible = true;
     }
+    
+    public Sprite(){
+        this.x = 0;
+        this.y = 20;
+    }
 
     protected void loadImage(String imageName) {
 

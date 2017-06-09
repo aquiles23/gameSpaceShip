@@ -28,16 +28,11 @@ public class Application extends JFrame {
            telas.setLocationRelativeTo(null);
            telas.setVisible(true);
           
-      EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-           Audio inicial = new Audio();
-           inicial.tocar("audio/ufo.wav");
-        
-          }
-        });
-         
-       
+           
+           MinhaThreads som = new MinhaThreads("audio/ufo.wav");
+           Thread tSom = new Thread(som);
+           tSom.run();
+
     }
 
 }

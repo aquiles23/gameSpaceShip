@@ -20,8 +20,6 @@ public class SpaceShip extends Sprite {
     protected int aux,cont=0,q=0;
     protected static int nave;
 
-    
-    
     public SpaceShip(int x, int y) {
         super(x, y);
         this.vivo = true;
@@ -162,7 +160,10 @@ public class SpaceShip extends Sprite {
            if(key == KeyEvent.VK_SPACE){
               aux = 1;
               if(TelasJogo.so == 1){ 
-                 tiro.tocar("audio/tiro.wav");
+                  MinhaThreads disparo = new MinhaThreads("audio/tiro.wav");
+                  Thread disp = new Thread(disparo);
+                  disp.run();
+//                 tiro.tocar("audio/tiro.wav");
               }
               missil.setX(x);
               if(missil.getY()<=0){

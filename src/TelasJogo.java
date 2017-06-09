@@ -40,6 +40,13 @@ public class TelasJogo extends javax.swing.JFrame {
         tela4.setVisible(false);
 
     }
+    
+    public TelasJogo() {
+
+        initComponents();
+        setResizable(false);
+
+    }
 
     public boolean isAberto() {
         return aberto;
@@ -65,12 +72,7 @@ public class TelasJogo extends javax.swing.JFrame {
         this.pessoa = pessoa;
     }
 
-    public TelasJogo() {
-
-        initComponents();
-        setResizable(false);
-
-    }
+   
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
