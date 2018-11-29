@@ -29,6 +29,8 @@ public class Map extends JPanel implements ActionListener{
 
     private  Image background;
     private final SpaceShip spaceship;
+    private AlienAgente alienAgent;
+    private AgentKeyListener agentListener;
     private JLabel pontos;
     private boolean status;
     private Application app;
@@ -75,6 +77,9 @@ public class Map extends JPanel implements ActionListener{
 int p=0,dif=3,l1=50,x=0,y,contr=0,controle=0;
 private void draw(Graphics g) throws InterruptedException {
        g.drawImage(spaceship.getImage(), spaceship.getX(), spaceship.getY(), this);
+       // Adicionado o alienAgent ao mapa do jogo
+       g.drawImage(alienAgent.alien.getImage(), alienAgent.alien.getX(), alienAgent.alien.getY(), this);
+       alienAgent.alien.posicionar();
         for(int i=0;i<spaceship.aliens.size();i++){
             g.drawImage(spaceship.aliens.get(i).getImage(), spaceship.aliens.get(i).getX(), spaceship.aliens.get(i).getY(), this);
                spaceship.aliens.get(i).posicionar();
@@ -269,6 +274,7 @@ private void draw(Graphics g) throws InterruptedException {
  
     private void updateSpaceship() {
         spaceship.move();
+        alienAgent.move();
     }
 
     private class KeyListerner extends KeyAdapter {
@@ -277,6 +283,7 @@ private void draw(Graphics g) throws InterruptedException {
         public void keyPressed(KeyEvent e) {
             try {
                 spaceship.keyPressed(e);
+                agentListener.keyPressed(e);
             } catch (InterruptedException ex) {
                 Logger.getLogger(Map.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -285,6 +292,7 @@ private void draw(Graphics g) throws InterruptedException {
         @Override
         public void keyReleased(KeyEvent e) {
             spaceship.keyReleased(e);
+            agentListener.keyReleased(e);
         }   
     }
 }
