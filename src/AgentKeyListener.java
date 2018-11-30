@@ -54,14 +54,14 @@ public class AgentKeyListener extends Agent {
 		        if (key == KeyEvent.VK_LEFT) { 
 		        	ACLMessage request = new ACLMessage(ACLMessage.REQUEST);
 		        	request.setContent("esq");
-		        	// myAgent.send(request);
+		        	send(request);
 		        }
 
 		        // Set speed to move to the right
 		        if (key == KeyEvent.VK_RIGHT) {
 		        	ACLMessage request = new ACLMessage(ACLMessage.REQUEST);
 		        	request.setContent("dir");
-		        	// myAgent.send(request);
+		        	send(request);
 		        }
 			}
 		});
@@ -85,7 +85,7 @@ public class AgentKeyListener extends Agent {
 		        if (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_RIGHT) {
 		            ACLMessage request = new ACLMessage(ACLMessage.REQUEST);
 		        	request.setContent("stop");
-		        	// myAgent.send(request);
+		        	send(request);
 		        }
 			}
 			

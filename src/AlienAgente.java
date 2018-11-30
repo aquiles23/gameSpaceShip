@@ -35,8 +35,8 @@ public class AlienAgente extends Agent {
 		this.alien = new ArrayList();
 		
 		// implementação
-		game = new Application();
-		game.main();  //inicia interface grafica e tudo no jogo.
+		// game = new Application();
+		// game.main();  //inicia interface grafica e tudo no jogo.
 		try { 
 			DFService.register(this, dfd);
 			
@@ -91,23 +91,25 @@ public class AlienAgente extends Agent {
 			
 			ACLMessage msg = myAgent.receive();
 			if(msg != null) {
-				System.out.println("AlienAgent - Criando Resposta!");
+				System.out.println("AlienAgent - Mensagem Recebida!");
 	
 				if(msg.getPerformative() == ACLMessage.REQUEST) {
 					System.out.println("AlienAgent - REQUEST!");
 					String content = msg.getContent();
 					if(content != null) {
-						System.out.println(content);
 						// Fazer com que o alien se mova de acordo com o conteudo
 						// que ele recebe no request
 						if(Objects.equals(content,"esq")) {
 							speed_x = -1 * MAX_SPEED_X;
+							System.out.println("AlienAgent - Movendo a esquerda");
 						} else if(Objects.equals(content,"dir")) {
 							speed_x = MAX_SPEED_X;
+							System.out.println("AlienAgent - Movendo a direita");
 						} else if(Objects.equals(content,"stop")) {
 							speed_x = 0;
+							System.out.println("AlienAgent - Parar movimento");
 						} else {
-							System.out.println("AlienAgent - NOT_UNDERSTOOD");
+							System.out.println("AlienAgent - Não entendi o comando :/");
 							block();
 						}
 					}
@@ -119,52 +121,6 @@ public class AlienAgente extends Agent {
 			
 		}
 	}
-		
-	// Após bater nas paredes laterais irá reagir andando para o lado oposto
-	
-	/*class movimentaAlien extends CyclicBehaviour { 
-		
-		private static final long serialVersionUID = 7768217846531384442L;
-
-		// Construtor do behaviour. Necessário, pois passamos parâmetro. 
-		public movimentaAlien(Agent a) { 
-			super(a); 
-		}
-		
-		public void action() {
-			ACLMessage  msg = myAgent.receive();
-			if(msg != null){
-	
-				if(msg.getPerformative() == ACLMessage.REQUEST) {
-					System.out.println("REQUEST!");
-					String content = msg.getContent();
-					if(content == "esq") {
-						if(alien.getX() == Game.getWidth()){
-					        alien.setX(0);
-					    }
-						else {
-							alien.setX(alien.getX()+ MAX_SPEED);
-						}
-					}
-					else if(content == "dir") {
-						if(alien.getX() == Game.getWidth()){
-					        alien.setX(0);
-					    }
-						else {
-							alien.setX(alien.getX()-1);
-						}
-					}
-					else {
-						block();
-					}
-
-				}
-			}
-			else {
-				block();
-			}
-		}
-	} */
 	
  
 	protected void takeDown() { 

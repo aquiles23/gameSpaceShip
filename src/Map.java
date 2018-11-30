@@ -20,6 +20,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import jade.domain.AMSService;
+import jade.domain.FIPAAgentManagement.*;
+import jade.wrapper.AgentController;
+import jade.wrapper.ContainerController;
+import jade.wrapper.ControllerException;
+import jade.wrapper.PlatformController;
+import jade.wrapper.StaleProxyException;
+import jade.core.*;
+import jade.core.Runtime;
 
 public class Map extends JPanel implements ActionListener{
 
@@ -124,6 +133,30 @@ private void draw(Graphics g) throws InterruptedException {
               spaceship.aliens.add(new Alien(x,y));
               if(contInstanciate == 0) {
             	  contInstanciate++;
+            	  
+            	  Runtime rt = Runtime.instance();
+            	  Profile p = new ProfileImpl();
+            	  ContainerController cc = rt.createAgentContainer(p);
+            	  
+            	  AgentController acAlien = null;
+            	  AgentController acListener = null;
+            	  
+            	  try {
+					acAlien = cc.createNewAgent("alien", "AlienAgente", null);
+					acAlien.start();
+					acListener = cc.createNewAgent("listener", "AgentKeyListener", null);
+				  } catch (StaleProxyException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				  }
+            	  try {
+					alienAgent = (AlienAgente) cc.getAgent("alien");
+					agentListener = (AgentKeyListener) cc.getAgent("listener");
+				  } catch (ControllerException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				  }
+        	      
             	  x = (int)(Math.random()*450);
                   y=  (int)(Math.random()*1);
                   // alienAgent.alien = new ArrayList();
