@@ -16,23 +16,24 @@ public class Application extends JFrame {
         setVisible(false);
     }
     
-    public static void main(String[] args) {
+    // Transferido para a classe main
+    public void main() {
+        Cadastro pessoa = new Cadastro();
+        Application app = new Application();
+        Map mapa = new Map(app,pessoa);
+        TelasJogo telas = new TelasJogo(pessoa,app);
+       
+        app.add(mapa);
+        telas.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        telas.setLocationRelativeTo(null);
+        telas.setVisible(true);
+       
         
-           Cadastro pessoa = new Cadastro();
-           Application app = new Application();
-           Map mapa = new Map(app,pessoa);
-           TelasJogo telas = new TelasJogo(pessoa,app);
-          
-           app.add(mapa);
-           telas.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-           telas.setLocationRelativeTo(null);
-           telas.setVisible(true);
-          
-           
-           MinhaThreads som = new MinhaThreads("audio/ufo.wav");
-           Thread tSom = new Thread(som);
-           tSom.run();
+        MinhaThreads som = new MinhaThreads("audio/ufo.wav");
+        Thread tSom = new Thread(som);
+        tSom.run();
 
-    }
-
+ }
 }
+
+

@@ -108,6 +108,11 @@ private void draw(Graphics g) throws InterruptedException {
 }
     public void dificuldade(){
         if(spaceship.cont==0){
+        	x = (int)(Math.random()*450);
+            y=  (int)(Math.random()*1);
+        	alienAgent = new AlienAgente();
+            alienAgent.alien = new Alien(x,y);
+            alienAgent.alien.loadImage("images/alien_HARD.png");
           for(int i=0;i<dif;i++){   
             if(p>=400){
                 p=0;
@@ -117,7 +122,8 @@ private void draw(Graphics g) throws InterruptedException {
               x = (int)(Math.random()*450);
               y=  (int)(Math.random()*1);
               spaceship.aliens.add(new Alien(x,y));
-              
+              alienAgent = new AlienAgente();
+              alienAgent.alien = new Alien(x,y);
                 if(spaceship.q > 50 && spaceship.q < 100){
                   spaceship.aliens.get(i).loadImage("images/alien_MEDIUM.png");  
                   ImageIcon image2 = new ImageIcon("images/space3.jpg");
@@ -274,7 +280,7 @@ private void draw(Graphics g) throws InterruptedException {
  
     private void updateSpaceship() {
         spaceship.move();
-        alienAgent.move();
+        //alienAgent.move();
     }
 
     private class KeyListerner extends KeyAdapter {
