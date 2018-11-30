@@ -111,7 +111,7 @@ private void draw(Graphics g) throws InterruptedException {
 }
     public void dificuldade(){
         if(spaceship.cont==0){
-        	int cont = 0;
+          int cont = 0;
           for(int i=0;i<dif;i++){   
             if(p>=400){
                 p=0;

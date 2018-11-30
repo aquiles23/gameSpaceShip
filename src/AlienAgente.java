@@ -1,4 +1,6 @@
 import jade.core.Agent;
+import java.util.Objects;
+import jade.core.*; 
 import jade.core.behaviours.*; 
 import jade.lang.acl.ACLMessage; 
 import jade.domain.FIPAAgentManagement.ServiceDescription; 
@@ -17,6 +19,7 @@ public class AlienAgente extends Agent {
 	public Alien alien;
 	private static final int MAX_SPEED_X = 1;
 	private int speed_x;
+	public Application game;
 
 	protected void setup() { 
 		
@@ -27,13 +30,19 @@ public class AlienAgente extends Agent {
 		sd.setName(getName()); 
 		sd.setType("AlienAgente"); 
 		dfd.addServices(sd); 
+		
+		// implementação
+		game = new Application();
+		game.main();  //inicia interface grafica e tudo no jogo.
 		try { 
 			DFService.register(this, dfd);
 			
 			// Criando o behaviour 
 
-			//movimentaAlien movAlien = new movimentaAlien(this); 
-			//addBehaviour(movAlien);
+			AlienAgentMoving movAlien = new AlienAgentMoving(this); 
+			addBehaviour(movAlien);
+			
+			
 			
 		} catch(FIPAException e) { 
 			e.printStackTrace();
@@ -41,22 +50,13 @@ public class AlienAgente extends Agent {
 		}
 	}
 	
-	protected void takeDown() { 
-		// Retira registro no DF 
-		try { 
-			DFService.deregister(this); 
-		} catch(FIPAException e) { 
-			e.printStackTrace(); 
-		}
-	}
 	
 	public void move() {
 		addBehaviour(new OneShotBehaviour() {
-
 			/**
 			 * 
 			 */
-			private static final long serialVersionUID = -1863520958845819764L;
+			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void action() {
@@ -76,9 +76,7 @@ public class AlienAgente extends Agent {
 	// Sempre que receber um request o alien tentará se mover
 	class AlienAgentMoving extends CyclicBehaviour {
 
-		/**
-		 * 
-		 */
+
 		private static final long serialVersionUID = -1320369895090804438L;
 		
 		public AlienAgentMoving(Agent a) {
@@ -86,38 +84,44 @@ public class AlienAgente extends Agent {
 		}
 		
 		public void action() {
-			System.out.println("AlienAgent - Inicializando a action do meu comportamento");
 			
-			System.out.println("AlienAgent - Recebendo o conteúdo enviado por um terceiro");
+			
 			ACLMessage msg = myAgent.receive();
 			if(msg != null) {
 				System.out.println("AlienAgent - Criando Resposta!");
-				
+	
 				if(msg.getPerformative() == ACLMessage.REQUEST) {
 					System.out.println("AlienAgent - REQUEST!");
 					String content = msg.getContent();
-					
 					if(content != null) {
+						System.out.println(content);
 						// Fazer com que o alien se mova de acordo com o conteudo
 						// que ele recebe no request
-						if(content.equals("esq")) {
+						if(Objects.equals(content,"esq")) {
 							speed_x = -1 * MAX_SPEED_X;
-						} else if(content == "dir") {
+						} else if(Objects.equals(content,"dir")) {
 							speed_x = MAX_SPEED_X;
-						} else if(content == "stop") {
+						} else if(Objects.equals(content,"stop")) {
 							speed_x = 0;
 						} else {
 							System.out.println("AlienAgent - NOT_UNDERSTOOD");
+							block();
 						}
+					}
+					else {
+						block();
 					}
 				}
 			}
 			
 		}
-	} 
-	
+	}
+		
 	// Após bater nas paredes laterais irá reagir andando para o lado oposto
+	
 	/*class movimentaAlien extends CyclicBehaviour { 
+		
+		private static final long serialVersionUID = 7768217846531384442L;
 
 		// Construtor do behaviour. Necessário, pois passamos parâmetro. 
 		public movimentaAlien(Agent a) { 
@@ -136,7 +140,7 @@ public class AlienAgente extends Agent {
 					        alien.setX(0);
 					    }
 						else {
-							alien.setX(alien.getX()+1);
+							alien.setX(alien.getX()+ MAX_SPEED);
 						}
 					}
 					else if(content == "dir") {
@@ -158,4 +162,14 @@ public class AlienAgente extends Agent {
 			}
 		}
 	} */
+	
+ 
+	protected void takeDown() { 
+		// Retira registro no DF 
+		try { 
+			DFService.deregister(this); 
+		} catch(FIPAException e) { 
+			e.printStackTrace(); 
+		}
+	}
 }
