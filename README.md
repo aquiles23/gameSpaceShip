@@ -6,6 +6,8 @@
 
 O jogo apresenta um menu com as opções listadas abaixo:
 
+-	Executar: Para executar o jogo inicialize o startApplicationAgent com a interface grafica do JADE.
+
 -	Jogar: Clicando nessa opção, uma tela será aberta solicitando algumas informações do jogador, é obrigatório preencher todos os campos, o preenchimento incorreto ou não preenchimento gera uma mensagem alertando a obrigatoriedade da ação. Há quatro opções nessa tela, uma referente ao salvamento do dados, outra opção que dá início ao jogo , uma que seleciona o sistema operacional e uma outra opção que permite ao jogador selecionar a nave que preferir,  é importante ressaltar que o jogo só será iniciado após o preenchimento e salvamento correto das informações.
 
 -	Instruções: Essa opção abre uma janela com algumas informações úteis ao jogador, apresenta os objetivos do jogo de forma resumida. 
