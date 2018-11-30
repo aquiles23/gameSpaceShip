@@ -1,4 +1,5 @@
 import java.awt.event.KeyEvent;
+import jade.core.AID;
 import jade.core.Agent;
 import jade.core.behaviours.OneShotBehaviour;
 import jade.domain.DFService;
@@ -54,6 +55,7 @@ public class AgentKeyListener extends Agent {
 		        if (key == KeyEvent.VK_LEFT) { 
 		        	ACLMessage request = new ACLMessage(ACLMessage.REQUEST);
 		        	request.setContent("esq");
+		        	request.addReceiver(new AID("alien", AID.ISLOCALNAME));
 		        	send(request);
 		        }
 
@@ -61,6 +63,7 @@ public class AgentKeyListener extends Agent {
 		        if (key == KeyEvent.VK_RIGHT) {
 		        	ACLMessage request = new ACLMessage(ACLMessage.REQUEST);
 		        	request.setContent("dir");
+		        	request.addReceiver(new AID("alien", AID.ISLOCALNAME));
 		        	send(request);
 		        }
 			}
@@ -85,6 +88,7 @@ public class AgentKeyListener extends Agent {
 		        if (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_RIGHT) {
 		            ACLMessage request = new ACLMessage(ACLMessage.REQUEST);
 		        	request.setContent("stop");
+		        	request.addReceiver(new AID("alien", AID.ISLOCALNAME));
 		        	send(request);
 		        }
 			}

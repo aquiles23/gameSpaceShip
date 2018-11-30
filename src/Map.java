@@ -145,6 +145,7 @@ private void draw(Graphics g) throws InterruptedException {
 					acAlien = cc.createNewAgent("alien", "AlienAgente", null);
 					acAlien.start();
 					acListener = cc.createNewAgent("listener", "AgentKeyListener", null);
+					acListener.start();
 				  } catch (StaleProxyException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

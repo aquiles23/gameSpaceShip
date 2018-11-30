@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import jade.core.Agent;
 import jade.domain.DFService;
 import jade.domain.FIPAException;
