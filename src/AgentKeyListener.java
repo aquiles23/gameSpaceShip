@@ -1,6 +1,7 @@
 import java.awt.event.KeyEvent;
 import jade.core.AID;
 import jade.core.Agent;
+import jade.core.behaviours.CyclicBehaviour;
 import jade.core.behaviours.OneShotBehaviour;
 import jade.domain.DFService;
 import jade.domain.FIPAException;
@@ -29,18 +30,25 @@ public class AgentKeyListener extends Agent {
 		try { 
 			DFService.register(this, dfd);
 			
-			// Criando o behaviour 
+			// Criando o behaviour
+			keyPressed();
+			keyReleased();
 			
 		} catch(FIPAException e) { 
 			e.printStackTrace();
 			doDelete();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 	
 	// Pegará o botão apertado e se for o <- ou ->
 	// ele irá mandar um REQUEST para o AlienAgente
-	public void keyPressed(KeyEvent e) throws InterruptedException {
-		addBehaviour(new OneShotBehaviour() {
+	
+	// public void keyPressed(KeyEvent e) throws InterruptedException {
+	public void keyPressed() throws InterruptedException {
+		addBehaviour(new CyclicBehaviour() {
 
 			/**
 			 * 
@@ -49,10 +57,14 @@ public class AgentKeyListener extends Agent {
 
 			@Override
 			public void action() {
-				int key = e.getKeyCode();
+				// int key = e.getKeyCode();
+				int x = (int)(Math.random()*3);
+				
+				try { Thread.sleep (1000); } catch (InterruptedException ex) {}
 				
 				// Set speed to move to the left
-		        if (key == KeyEvent.VK_LEFT) { 
+		        // if (key == KeyEvent.VK_LEFT) {
+				if(x == 1) {
 		        	ACLMessage request = new ACLMessage(ACLMessage.REQUEST);
 		        	request.setContent("esq");
 		        	request.addReceiver(new AID("alien", AID.ISLOCALNAME));
@@ -60,7 +72,8 @@ public class AgentKeyListener extends Agent {
 		        }
 
 		        // Set speed to move to the right
-		        if (key == KeyEvent.VK_RIGHT) {
+		        // if (key == KeyEvent.VK_RIGHT) {
+				if(x == 2) {
 		        	ACLMessage request = new ACLMessage(ACLMessage.REQUEST);
 		        	request.setContent("dir");
 		        	request.addReceiver(new AID("alien", AID.ISLOCALNAME));
@@ -73,8 +86,10 @@ public class AgentKeyListener extends Agent {
 	
 	// Pegará o botão soltado, e se for o <- ou ->
 	// ele irá mandar um REQUEST para o AlienAgente
-	public void keyReleased(KeyEvent e) {
-		addBehaviour(new OneShotBehaviour() {
+	// public void keyReleased(KeyEvent e) {
+	public void keyReleased() {
+		// addBehaviour(new OneShotBehaviour() {
+		addBehaviour(new CyclicBehaviour() {
 
 			/**
 			 * 
@@ -83,9 +98,13 @@ public class AgentKeyListener extends Agent {
 
 			@Override
 			public void action() {
-				int key = e.getKeyCode();
-
-		        if (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_RIGHT) {
+				// int key = e.getKeyCode();
+				
+				try { Thread.sleep (1000); } catch (InterruptedException ex) {}
+				
+				int x = (int)(Math.random()*2);
+		        // if (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_RIGHT) {
+				if (x == 1) {
 		            ACLMessage request = new ACLMessage(ACLMessage.REQUEST);
 		        	request.setContent("stop");
 		        	request.addReceiver(new AID("alien", AID.ISLOCALNAME));
