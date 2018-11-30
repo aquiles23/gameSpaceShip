@@ -1,4 +1,6 @@
 import jade.core.Agent;
+
+import java.util.ArrayList;
 import java.util.Objects;
 import jade.core.*; 
 import jade.core.behaviours.*; 
@@ -16,7 +18,7 @@ public class AlienAgente extends Agent {
 	 * 
 	 */
 	private static final long serialVersionUID = 2143965605288620707L;
-	public Alien alien;
+	public ArrayList <Alien> alien;
 	private static final int MAX_SPEED_X = 1;
 	private int speed_x;
 	public Application game;
@@ -30,6 +32,7 @@ public class AlienAgente extends Agent {
 		sd.setName(getName()); 
 		sd.setType("AlienAgente"); 
 		dfd.addServices(sd); 
+		this.alien = new ArrayList();
 		
 		// implementação
 		game = new Application();
@@ -62,12 +65,12 @@ public class AlienAgente extends Agent {
 			public void action() {
 				// TODO Auto-generated method stub
 				// Limits the movement of the alien to the side edges.
-		        if((speed_x < 0 && alien.getX() <= 0) || (speed_x > 0 && alien.getX() + alien.width >= Game.getWidth())){
+		        if((speed_x < 0 && alien.get(0).getX() <= 0) || (speed_x > 0 && alien.get(0).getX() + alien.get(0).width >= Game.getWidth())){
 		            speed_x = 0;
 		        }
 		        
 		        // Moves the alien on the horizontal axis
-		        alien.setX(alien.getX() + speed_x);
+		        alien.get(0).setX(alien.get(0).getX() + speed_x);
 			}
 			
 		});

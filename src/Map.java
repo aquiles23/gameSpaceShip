@@ -15,6 +15,7 @@ import java.awt.Image;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
@@ -39,6 +40,8 @@ public class Map extends JPanel implements ActionListener{
     public static  FileWriter arq;
     private int cont=0;
     private ImageIcon image3,image4;
+    private boolean readyAgent = false;
+    private int contInstanciate = 0;
     
     public Map(Application app,Cadastro pessoa) {
         this.app = app;
@@ -78,8 +81,10 @@ int p=0,dif=3,l1=50,x=0,y,contr=0,controle=0;
 private void draw(Graphics g) throws InterruptedException {
        g.drawImage(spaceship.getImage(), spaceship.getX(), spaceship.getY(), this);
        // Adicionado o alienAgent ao mapa do jogo
-       g.drawImage(alienAgent.alien.getImage(), alienAgent.alien.getX(), alienAgent.alien.getY(), this);
-       alienAgent.alien.posicionar();
+       if(readyAgent) {
+		   g.drawImage(alienAgent.alien.get(0).getImage(), alienAgent.alien.get(0).getX(), alienAgent.alien.get(0).getY(), this);
+		   alienAgent.alien.get(0).posicionar();
+       }
         for(int i=0;i<spaceship.aliens.size();i++){
             g.drawImage(spaceship.aliens.get(i).getImage(), spaceship.aliens.get(i).getX(), spaceship.aliens.get(i).getY(), this);
                spaceship.aliens.get(i).posicionar();
@@ -91,9 +96,6 @@ private void draw(Graphics g) throws InterruptedException {
                 }
             spaceship.missil.setX(spaceship.missil.getX());
             spaceship.missil.setY(spaceship.missil.getY()-80);
-        }
-        if(alienAgent.alien.getY() == 499) {
-        	spaceship.vidas--;
         }
         for(int i=0;i<spaceship.aliens.size();i++){
             if(spaceship.aliens.get(i).getY() == 499){
@@ -111,7 +113,6 @@ private void draw(Graphics g) throws InterruptedException {
 }
     public void dificuldade(){
         if(spaceship.cont==0){
-          int cont = 0;
           for(int i=0;i<dif;i++){   
             if(p>=400){
                 p=0;
@@ -121,9 +122,14 @@ private void draw(Graphics g) throws InterruptedException {
               x = (int)(Math.random()*450);
               y=  (int)(Math.random()*1);
               spaceship.aliens.add(new Alien(x,y));
-              if(cont == 0) {
-            	  alienAgent.alien = new Alien(x,y);
-            	  alienAgent.alien.loadImage("images/alien_HARD.png");
+              if(contInstanciate == 0) {
+            	  contInstanciate++;
+            	  x = (int)(Math.random()*450);
+                  y=  (int)(Math.random()*1);
+                  // alienAgent.alien = new ArrayList();
+            	  alienAgent.alien.add(new Alien(x,y));
+            	  alienAgent.alien.get(0).loadImage("images/alien_HARD.png");
+            	  readyAgent = true;
               }
               
             if(spaceship.q > 50 && spaceship.q < 100){
@@ -163,11 +169,6 @@ private void draw(Graphics g) throws InterruptedException {
        }
     }
    public void explosaoColisao(){
-	   if(alienAgent.alien.getBounds().intersects(spaceship.getBounds())) {
-		   spaceship.loadImage("images/explosion.png");
-		   SpaceShip.vidas = 0;
-		   this.background = image3.getImage(); 
-	   }
         for(int i=0;i<spaceship.aliens.size();i++ ){
            if(spaceship.aliens.get(i).getBounds().intersects(spaceship.getBounds())){
               spaceship.loadImage("images/explosion.png");
@@ -287,7 +288,9 @@ private void draw(Graphics g) throws InterruptedException {
  
     private void updateSpaceship() {
         spaceship.move();
-        // alienAgent.move();
+        if(readyAgent) {
+        	alienAgent.move();
+        }
     }
 
     private class KeyListerner extends KeyAdapter {
@@ -296,7 +299,7 @@ private void draw(Graphics g) throws InterruptedException {
         public void keyPressed(KeyEvent e) {
             try {
                 spaceship.keyPressed(e);
-                agentListener.keyPressed(e);
+                // agentListener.keyPressed(e);
             } catch (InterruptedException ex) {
                 Logger.getLogger(Map.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -305,7 +308,8 @@ private void draw(Graphics g) throws InterruptedException {
         @Override
         public void keyReleased(KeyEvent e) {
             spaceship.keyReleased(e);
-            agentListener.keyReleased(e);
+        	// agentListener.keyReleased(e);
+            
         }   
     }
 }
