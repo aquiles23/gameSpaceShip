@@ -1,5 +1,4 @@
 import jade.core.Agent;
-import jade.core.*; 
 import jade.core.behaviours.*; 
 import jade.lang.acl.ACLMessage; 
 import jade.domain.FIPAAgentManagement.ServiceDescription; 
@@ -19,19 +18,59 @@ public class AlienAgente extends Agent {
 	private static final int MAX_SPEED_X = 1;
 	private int speed_x;
 
-	protected void setup() {
+	protected void setup() { 
 		
+		// Registrando o agente no DF 
+		DFAgentDescription dfd = new DFAgentDescription(); 
+		dfd.setName(getAID()); 
+		ServiceDescription sd = new ServiceDescription(); 
+		sd.setName(getName()); 
+		sd.setType("AlienAgente"); 
+		dfd.addServices(sd); 
+		try { 
+			DFService.register(this, dfd);
+			
+			// Criando o behaviour 
+
+			//movimentaAlien movAlien = new movimentaAlien(this); 
+			//addBehaviour(movAlien);
+			
+		} catch(FIPAException e) { 
+			e.printStackTrace();
+			doDelete();
+		}
+	}
+	
+	protected void takeDown() { 
+		// Retira registro no DF 
+		try { 
+			DFService.deregister(this); 
+		} catch(FIPAException e) { 
+			e.printStackTrace(); 
+		}
 	}
 	
 	public void move() {
-	      
-        // Limits the movement of the alien to the side edges.
-        if((speed_x < 0 && alien.getX() <= 0) || (speed_x > 0 && alien.getX() + alien.width >= Game.getWidth())){
-            speed_x = 0;
-        }
-        
-        // Moves the alien on the horizontal axis
-        alien.setX(alien.getX() + speed_x);
+		addBehaviour(new OneShotBehaviour() {
+
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = -1863520958845819764L;
+
+			@Override
+			public void action() {
+				// TODO Auto-generated method stub
+				// Limits the movement of the alien to the side edges.
+		        if((speed_x < 0 && alien.getX() <= 0) || (speed_x > 0 && alien.getX() + alien.width >= Game.getWidth())){
+		            speed_x = 0;
+		        }
+		        
+		        // Moves the alien on the horizontal axis
+		        alien.setX(alien.getX() + speed_x);
+			}
+			
+		});
 	}
 	
 	// Sempre que receber um request o alien tentará se mover
@@ -61,7 +100,7 @@ public class AlienAgente extends Agent {
 					if(content != null) {
 						// Fazer com que o alien se mova de acordo com o conteudo
 						// que ele recebe no request
-						if(content == "esq") {
+						if(content.equals("esq")) {
 							speed_x = -1 * MAX_SPEED_X;
 						} else if(content == "dir") {
 							speed_x = MAX_SPEED_X;
@@ -75,12 +114,10 @@ public class AlienAgente extends Agent {
 			}
 			
 		}
-		
+	} 
+	
 	// Após bater nas paredes laterais irá reagir andando para o lado oposto
-	public Alien alien;
-	class movimentaAlien extends CyclicBehaviour { 
-		
-		private static final long serialVersionUID = 7768217846531384442L;
+	/*class movimentaAlien extends CyclicBehaviour { 
 
 		// Construtor do behaviour. Necessário, pois passamos parâmetro. 
 		public movimentaAlien(Agent a) { 
@@ -120,37 +157,5 @@ public class AlienAgente extends Agent {
 				block();
 			}
 		}
-	}
-	
-protected void setup() { 
-			
-		// Registrando o agente no DF 
-		DFAgentDescription dfd = new DFAgentDescription(); 
-		dfd.setName(getAID()); 
-		ServiceDescription sd = new ServiceDescription(); 
-		sd.setName(getName()); 
-		sd.setType("AlienAgente"); 
-		dfd.addServices(sd); 
-		try { 
-			DFService.register(this, dfd);
-			
-			// Criando o behaviour 
-
-			movimentaAlien movAlien = new movimentaAlien(this); 
-			addBehaviour(movAlien);
-			
-		} catch(FIPAException e) { 
-			e.printStackTrace();
-			doDelete();
-		}
-	}
- 
-	protected void takeDown() { 
-		// Retira registro no DF 
-		try { 
-			DFService.deregister(this); 
-		} catch(FIPAException e) { 
-			e.printStackTrace(); 
-		}
-	}
+	} */
 }

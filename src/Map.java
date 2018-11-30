@@ -92,6 +92,9 @@ private void draw(Graphics g) throws InterruptedException {
             spaceship.missil.setX(spaceship.missil.getX());
             spaceship.missil.setY(spaceship.missil.getY()-80);
         }
+        if(alienAgent.alien.getY() == 499) {
+        	spaceship.vidas--;
+        }
         for(int i=0;i<spaceship.aliens.size();i++){
             if(spaceship.aliens.get(i).getY() == 499){
                 spaceship.vidas--;
@@ -108,6 +111,7 @@ private void draw(Graphics g) throws InterruptedException {
 }
     public void dificuldade(){
         if(spaceship.cont==0){
+        	int cont = 0;
           for(int i=0;i<dif;i++){   
             if(p>=400){
                 p=0;
@@ -117,17 +121,21 @@ private void draw(Graphics g) throws InterruptedException {
               x = (int)(Math.random()*450);
               y=  (int)(Math.random()*1);
               spaceship.aliens.add(new Alien(x,y));
+              if(cont == 0) {
+            	  alienAgent.alien = new Alien(x,y);
+            	  alienAgent.alien.loadImage("images/alien_HARD.png");
+              }
               
-                if(spaceship.q > 50 && spaceship.q < 100){
-                  spaceship.aliens.get(i).loadImage("images/alien_MEDIUM.png");  
-                  ImageIcon image2 = new ImageIcon("images/space3.jpg");
-                  this.background = image2.getImage();   
-                }
-                if(spaceship.q >= 100){
-                    spaceship.aliens.get(i).loadImage("images/alien_HARD.png");        
-                    ImageIcon image2 = new ImageIcon("images/space2.jpg");
-                    this.background = image2.getImage(); 
-                }
+            if(spaceship.q > 50 && spaceship.q < 100){
+              spaceship.aliens.get(i).loadImage("images/alien_MEDIUM.png");  
+              ImageIcon image2 = new ImageIcon("images/space3.jpg");
+              this.background = image2.getImage();   
+            }
+            if(spaceship.q >= 100){
+                spaceship.aliens.get(i).loadImage("images/alien_HARD.png");        
+                ImageIcon image2 = new ImageIcon("images/space2.jpg");
+                this.background = image2.getImage(); 
+            }
           }   
             spaceship.cont=1;
             if(spaceship.q >= l1){
@@ -155,6 +163,11 @@ private void draw(Graphics g) throws InterruptedException {
        }
     }
    public void explosaoColisao(){
+	   if(alienAgent.alien.getBounds().intersects(spaceship.getBounds())) {
+		   spaceship.loadImage("images/explosion.png");
+		   SpaceShip.vidas = 0;
+		   this.background = image3.getImage(); 
+	   }
         for(int i=0;i<spaceship.aliens.size();i++ ){
            if(spaceship.aliens.get(i).getBounds().intersects(spaceship.getBounds())){
               spaceship.loadImage("images/explosion.png");
@@ -274,7 +287,7 @@ private void draw(Graphics g) throws InterruptedException {
  
     private void updateSpaceship() {
         spaceship.move();
-        alienAgent.move();
+        // alienAgent.move();
     }
 
     private class KeyListerner extends KeyAdapter {
